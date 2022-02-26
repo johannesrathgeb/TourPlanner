@@ -6,7 +6,27 @@
         xmlns:local="clr-namespace:TourPlanner"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
+    <Grid Background="#FF1B1B1B">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="6*"/>
+            <RowDefinition Height="4*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="2*" />
+            <ColumnDefinition Width="2*" />
+            <ColumnDefinition Width="2*" />
+        </Grid.ColumnDefinitions>
+
+        <Label Grid.Row="0" Grid.Column="0" Content="Tours" Background="#FF1B1B1B" Foreground="White"/>
+        <TextBox Grid.Row="1" Grid.Column="0" Grid.RowSpan="2" Text="TourName1" Background="#FF292929" Foreground="White"/>
+
+        <Button Grid.Row="0" Grid.Column="1" Content="Add" Background="#FF30A91F" Foreground="White"/>
+        <Button Grid.Row="0" Grid.Column="2" Content="Edit" Background="#FF2652BD" Foreground="White"/>
+        <Button Grid.Row="0" Grid.Column="3" Content="Delete" Background="#FFCC3939" Foreground="White"/>
+        <Label Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" Content="Map" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="Black" Background="#FFCACCC6"/>
+        <Label Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" Content="TourData" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="#FF046192" Foreground="White"/>
 
     </Grid>
 </Window>
