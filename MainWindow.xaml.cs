@@ -23,6 +23,7 @@ namespace TourPlanner
         public MainWindow()
         {
             InitializeComponent();
-        }
-    }
-}
+        }               
+    }                   
+}                       
+                        
