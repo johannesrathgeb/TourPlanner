@@ -6,6 +6,12 @@
         xmlns:local="clr-namespace:TourPlanner"
         mc:Ignorable="d"
         Title="Tour Planner" Height="450" Width="800">
+
+    <Window.DataContext>
+        <local:MainWindowViewModel/>
+    </Window.DataContext>
+    
+    
     <Grid Background="#FF1B1B1B">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -23,15 +29,9 @@
         </Grid.ColumnDefinitions>
 
         <Label Grid.Row="0" Grid.Column="0" Content="Tours" Background="#FF1B1B1B" Foreground="White"/>
-        <TextBox Grid.Row="3" Grid.Column="0" Text="TourName1" Background="#FF292929" Foreground="White"/>
-<!--
-        <DockPanel Grid.Row="1" Grid.Column="0">
-            <Button Grid.Row="1" Width="2*" Grid.Column="0" Content="+" Background="DarkBlue" Foreground="White"/>
-            <Button Grid.Row="1" Width="2*" Grid.Column="0" Content="-" Background="Blue" Foreground="White"/>
-            <Button Grid.Row="1" Width="2*"  Grid.Column="0" Content="[]" Background="DarkBlue" Foreground="White"/>
-        </DockPanel>
-        -->
-
+        <TextBox Text="{Binding Selected, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Row="3" Grid.Column="0" Background="#FF292929" Foreground="White"/>
+        
+        
         <Grid Grid.Row="1" Grid.Column="0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition></ColumnDefinition>
@@ -54,7 +54,7 @@
         <Button Grid.Row="0" Grid.Column="4" Content="Help" Background="#FFCC3939" Foreground="White"/>
         <Label Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="4" Content="Map" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="Black" Background="#FFCACCC6"/>
         <TextBox Grid.Row="2" Grid.Column="0" Text="Search" Background="DarkGray" Foreground="White" />
-        <Label Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="4" Content="Title: " Background="DarkGray" Foreground="White"/>
+        <TextBox Text="{Binding Output, StringFormat=Title: {0}, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="4" Background="DarkGray" Foreground="White"/>
 
         <RadioButton Grid.Row="2" Grid.Column="1" Foreground="White" IsChecked="True" >Route</RadioButton>
         <RadioButton Grid.Row="2" Grid.Column="2" Foreground="White" >Description</RadioButton>
