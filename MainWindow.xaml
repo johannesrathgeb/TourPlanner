@@ -6,7 +6,10 @@
         xmlns:local="clr-namespace:TourPlanner"
         mc:Ignorable="d"
         Title="Tour Planner" Height="450" Width="800">
-
+        <!--:DataContext="local:MainWindowViewModel"-->
+        
+    
+    
     <Window.DataContext>
         <local:MainWindowViewModel/>
     </Window.DataContext>
@@ -54,7 +57,7 @@
         <Button Grid.Row="0" Grid.Column="4" Content="Help" Background="#FFCC3939" Foreground="White"/>
         <Label Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="4" Content="Map" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="Black" Background="#FFCACCC6"/>
         <TextBox Grid.Row="2" Grid.Column="0" Text="Search" Background="DarkGray" Foreground="White" />
-        <TextBox Text="{Binding Output, StringFormat=Title: {0}, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="4" Background="DarkGray" Foreground="White"/>
+        <TextBlock Text="{Binding Output, StringFormat=Title: {0}, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="4" Background="DarkGray" Foreground="White"/>
 
         <RadioButton Grid.Row="2" Grid.Column="1" Foreground="White" IsChecked="True" >Route</RadioButton>
         <RadioButton Grid.Row="2" Grid.Column="2" Foreground="White" >Description</RadioButton>

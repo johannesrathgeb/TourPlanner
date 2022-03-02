@@ -18,12 +18,12 @@ namespace TourPlanner
             get => selected;
             set
             {
-                //if (selected != value)
-                //{
+                if (selected != value)
+                {
                     selected = value;
-                    NotifyPropertyChanging(nameof(Output));
+                    //NotifyPropertyChanging(nameof(Output));
                     NotifyPropertyChanged(nameof(Output));
-                //}
+                }
             }
         }
 
