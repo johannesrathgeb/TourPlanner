@@ -41,12 +41,6 @@ namespace TourPlanner
 
         protected void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
         {
-            /*
-            if(!string.IsNullOrEmpty(propertyName))
-            {
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(propertyName)));
-            }
-            */
 
             var handler = PropertyChanged;
             if(handler != null)
@@ -56,14 +50,15 @@ namespace TourPlanner
 
         }
 
+        /*
         protected void NotifyPropertyChanging([CallerMemberName] string propertyName = "")
         {
-            /*
+            
             if (!string.IsNullOrEmpty(propertyName))
             {
                 PropertyChanging?.Invoke(this, new PropertyChangingEventArgs(nameof(propertyName)));
             }
-            */
+            
 
             var handler = PropertyChanging;
             if(handler != null)
@@ -72,6 +67,7 @@ namespace TourPlanner
             }
 
         }
+        */
 
 
         /*
