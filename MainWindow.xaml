@@ -6,35 +6,37 @@
         xmlns:local="clr-namespace:TourPlanner"
         mc:Ignorable="d"
         Title="Tour Planner" Height="450" Width="800">
-        <!--:DataContext="local:MainWindowViewModel"-->
-        
-    
-    
+
     <Window.DataContext>
         <local:MainWindowViewModel/>
     </Window.DataContext>
-    
-    
+        
     <Grid Background="#FF1B1B1B">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="1*"/>
             <RowDefinition Height="1*"/>
             <RowDefinition Height="10*"/>
-
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="3*" />
             <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="2*" />
-            <ColumnDefinition Width="2*" />
-            <ColumnDefinition Width="2*" />
-            <ColumnDefinition Width="2*" />
+            <ColumnDefinition Width="3*" />
+            <ColumnDefinition Width="4*" />
+            <ColumnDefinition Width="4*" />
+            <ColumnDefinition Width="4*" />
         </Grid.ColumnDefinitions>
 
         <Label Grid.Row="0" Grid.Column="0" Content="Tours" Background="#FF1B1B1B" Foreground="White"/>
-        <TextBox Text="{Binding Selected, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Row="3" Grid.Column="0" Background="#FF292929" Foreground="White"/>
-        
-        
+
+        <ListBox ItemsSource="{Binding Tours}" Grid.Row="3" Grid.Column="0" Grid.RowSpan="3" Background="#FF1B1B1B">
+            <ListBox.ItemTemplate >
+                <DataTemplate>
+                    <TextBlock Text="{Binding Name}" Foreground="White"/>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
         <Grid Grid.Row="1" Grid.Column="0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition></ColumnDefinition>
@@ -42,26 +44,22 @@
                 <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
 
-
-            <Button Grid.Column="0" Content="+" Background="DarkGray" Foreground="White"/>
+            <Button Grid.Column="0" Content="+" Background="DarkGray" Foreground="White" Command="{Binding AddCommand}"/>
             <Button Grid.Column="1" Content="-" Background="Gray" Foreground="White"/>
             <Button Grid.Column="2" Content="[]" Background="LightGray" Foreground="White"/>
 
         </Grid>
-        
 
-
-        <Button Grid.Row="0" Grid.Column="1" Content="File" Background="#FF30A91F" Foreground="White"/>
-        <Button Grid.Row="0" Grid.Column="2" Content="Edit" Background="Orange" Foreground="White"/>
-        <Button Grid.Row="0" Grid.Column="3" Content="Options" Background="#FF2652BD" Foreground="White"/>
-        <Button Grid.Row="0" Grid.Column="4" Content="Help" Background="#FFCC3939" Foreground="White"/>
-        <Label Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="4" Content="Map" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="Black" Background="#FFCACCC6"/>
+        <Button Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Content="File" Background="#FF30A91F" Foreground="White"/>
+        <Button Grid.Row="0" Grid.Column="3" Content="Edit" Background="Orange" Foreground="White"/>
+        <Button Grid.Row="0" Grid.Column="4" Content="Options" Background="#FF2652BD" Foreground="White"/>
+        <Button Grid.Row="0" Grid.Column="5" Content="Help" Background="#FFCC3939" Foreground="White"/>
+        <Label Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="5" Content="Map" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="Black" Background="#FFCACCC6"/>
         <TextBox Grid.Row="2" Grid.Column="0" Text="Search" Background="DarkGray" Foreground="White" />
-        <TextBlock Text="{Binding Output, StringFormat=Title: {0}, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="4" Background="DarkGray" Foreground="White"/>
-
-        <RadioButton Grid.Row="2" Grid.Column="1" Foreground="White" IsChecked="True" >Route</RadioButton>
-        <RadioButton Grid.Row="2" Grid.Column="2" Foreground="White" >Description</RadioButton>
+        <Label Content="Title: " Name="BaseLabel" Grid.Row="1" Grid.Column="1" Background="DarkGray" Foreground="White" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" />
+        <TextBox Text="{Binding NewTour.Name}" Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="4" Background="DarkGray" Foreground="White" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
+        <RadioButton Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Foreground="White" IsChecked="True" >Route</RadioButton>
+        <RadioButton Grid.Row="2" Grid.Column="3" Foreground="White" >Description</RadioButton>
         
-
     </Grid>
 </Window>

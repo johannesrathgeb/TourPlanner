@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -10,38 +11,54 @@ namespace TourPlanner
 {
     public class MainWindowViewModel : INotifyPropertyChanged, INotifyPropertyChanging
     {
+        Tour newTour = new Tour();
+        private ObservableCollection<Tour> tours = new ObservableCollection<Tour>();
 
-        string selected; 
-
-        public string Selected
-        {
-            get => selected;
+        public ObservableCollection<Tour> Tours 
+        { 
+            get => tours;
             set
             {
-                if (selected != value)
+                if(tours != value)
                 {
-                    selected = value;
-                    //NotifyPropertyChanging(nameof(Output));
-                    NotifyPropertyChanged(nameof(Output));
+                    tours = value;
+                    this.NotifyPropertyChanged();
+                }
+            }
+        }
+        public event PropertyChangedEventHandler? PropertyChanged;
+        public event PropertyChangingEventHandler? PropertyChanging;
+
+        public Tour NewTour
+        {
+            get => newTour;
+            set
+            {
+                if(newTour != value)
+                {
+                    newTour = value;
+                    this.NotifyPropertyChanged();
                 }
             }
         }
 
-        public string Output => Selected;
-
-
+        public DelegateCommand AddCommand { get; set; }
 
         public MainWindowViewModel()
         {
-            Selected = "";
+            this.AddCommand = new DelegateCommand(
+                //(o) => !String.IsNullOrEmpty(NewTour.Name),
+                (o) =>
+                {
+                    this.Tours.Add(NewTour);
+                    NewTour = new Tour();
+                });
         }
 
-        public event PropertyChangedEventHandler? PropertyChanged;
-        public event PropertyChangingEventHandler? PropertyChanging;
+        public string ToursList { get; set; }
 
         protected void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
         {
-
             var handler = PropertyChanged;
             if(handler != null)
             {
@@ -49,7 +66,7 @@ namespace TourPlanner
             }
 
         }
-
+        
         /*
         protected void NotifyPropertyChanging([CallerMemberName] string propertyName = "")
         {
