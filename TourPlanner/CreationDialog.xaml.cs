@@ -10,21 +10,23 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TourPlanner.ViewModels;
 
 namespace TourPlanner
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaktionslogik für CreationDialogue.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class CreationDialogue : Window
     {
-        public MainWindow()
+        public CreationDialogue()
         {
-            //DataContext = new MainWindowViewModel();
             InitializeComponent();
-        }               
-    }                   
-}                       
-                        
+            //var vm = this.DataContext as CreationDialogueViewModel;
+            var vm = (CreationDialogVM)this.DataContext;
+            vm.Ok+=(o, e) => this.DialogResult = true;
+            vm.Cancel+=(o,e) => this.DialogResult = false;
+        }
+    }
+}
