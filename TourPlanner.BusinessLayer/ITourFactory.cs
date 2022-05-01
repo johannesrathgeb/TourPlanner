@@ -11,5 +11,9 @@ namespace TourPlanner.BusinessLayer
     {
         IEnumerable<Tour> GetItems();
         IEnumerable<Tour> Search(string itemName, bool caseSensitive = false);
+
+        IEnumerable<Tour> DeleteTour(IEnumerable<Tour> Tours, int index);
+
+
     }
 }

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TourPlanner.ViewModels"
         mc:Ignorable="d"
-        Title="Tour Planner" Height="450" Width="800" Loaded="Window_Loaded">
+        Title="Tour Planner" Height="450" Width="800">
 
     <Window.DataContext>
         <local:MainWindowVM/>
@@ -29,8 +29,8 @@
 
         <Label Grid.Row="0" Grid.Column="0" Content="Tours" Background="#FF1B1B1B" Foreground="White"/>
 
-        <ListBox ItemsSource="{Binding Tours}" Grid.Row="3" Grid.Column="0" Grid.RowSpan="3" Background="#FF1B1B1B">
-            <ListBox.ItemTemplate >
+        <ListBox SelectedIndex="{Binding SelectedIndex}" ItemsSource="{Binding Tours, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Row="3" Grid.Column="0" Grid.RowSpan="3" Background="#FF1B1B1B" >
+            <ListBox.ItemTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding Name}" Foreground="White"/>
                 </DataTemplate>
@@ -45,7 +45,7 @@
             </Grid.ColumnDefinitions>
 
             <Button Grid.Column="0" Content="+" Background="DarkGray" Foreground="White" Command="{Binding OpenDialogCommand}"/>
-            <Button Grid.Column="1" Content="-" Background="Gray" Foreground="White"/>
+            <Button Grid.Column="1" Content="-" Background="Gray" Foreground="White" Command="{Binding DeleteTourCommand}"/>
             <Button Grid.Column="2" Content="[]" Background="LightGray" Foreground="White"/>
 
         </Grid>
@@ -54,12 +54,45 @@
         <Button Grid.Row="0" Grid.Column="3" Content="Edit" Background="Orange" Foreground="White"/>
         <Button Grid.Row="0" Grid.Column="4" Content="Options" Background="#FF2652BD" Foreground="White"/>
         <Button Grid.Row="0" Grid.Column="5" Content="Help" Background="#FFCC3939" Foreground="White"/>
-        <Label Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="5" Content="Map" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="Black" Background="#FFCACCC6"/>
         <TextBox Grid.Row="2" Grid.Column="0" Text="Search" Background="DarkGray" Foreground="White" />
         <Label Content="Title: " Name="BaseLabel" Grid.Row="1" Grid.Column="1" Background="DarkGray" Foreground="White" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" />
-        <TextBox Text="{Binding NewTour.Name}" Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="4" Background="DarkGray" Foreground="White" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
-        <RadioButton Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Foreground="White" IsChecked="True" >Route</RadioButton>
-        <RadioButton Grid.Row="2" Grid.Column="3" Foreground="White" >Description</RadioButton>
-        
+        <Label Content="{Binding SelectedTour.Name}" Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="4" Background="DarkGray" Foreground="White" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
+        <RadioButton Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Foreground="White" IsChecked="{Binding DescriptionChecked}">Description</RadioButton>
+        <RadioButton Grid.Row="2" Grid.Column="3" Foreground="White" >Route</RadioButton>
+
+
+        <Grid Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="5" Visibility="{Binding InformationVisible}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="2*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="5*" />
+            </Grid.ColumnDefinitions>
+
+            <Label Grid.Row="0" Grid.Column="0" Foreground="White">Name:</Label>
+            <Label Grid.Row="1" Grid.Column="0" Foreground="White">Tour Description:</Label>
+            <Label Grid.Row="2" Grid.Column="0" Foreground="White">From:</Label>
+            <Label Grid.Row="3" Grid.Column="0" Foreground="White">To:</Label>
+            <Label Grid.Row="4" Grid.Column="0" Foreground="White">Transport Type:</Label>
+            <Label Grid.Row="5" Grid.Column="0" Foreground="White">Tour Distance:</Label>
+            <Label Grid.Row="6" Grid.Column="0" Foreground="White">Estimated Time:</Label>
+
+            <Label Content="{Binding SelectedTour.Name}" Grid.Row="0" Grid.Column="1" Foreground="White"/>
+            <Label Content="{Binding SelectedTour.TourDescription}" Grid.Row="1" Grid.Column="1" Foreground="White"/>
+            <Label Content="{Binding SelectedTour.From}" Grid.Row="2" Grid.Column="1" Foreground="White"/>
+            <Label Content="{Binding SelectedTour.To}" Grid.Row="3" Grid.Column="1" Foreground="White"/>
+            <Label Content="{Binding SelectedTour.TransportType}" Grid.Row="4" Grid.Column="1" Foreground="White"/>
+            <Label Content="{Binding SelectedTour.TourDistance}" Grid.Row="5" Grid.Column="1" Foreground="White"/>
+            <Label Content="{Binding SelectedTour.EstimatedRoute}" Grid.Row="6" Grid.Column="1" Foreground="White"/>
+        </Grid>
+
+        <Image Source="{Binding Filepath}" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="5" Visibility="{Binding RouteVisible}"></Image>
     </Grid>
 </Window>
