@@ -4,8 +4,10 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TourPlanner.DataAccessLayer;
 using TourPlanner.Models;
-using TourPlanner.ViewModels; 
+using TourPlanner.ViewModels;
+using System.IO; 
 
 namespace TourPlanner.Commands
 {
@@ -31,8 +33,28 @@ namespace TourPlanner.Commands
 
         public override void Execute(object? parameter)
         {
-            MainWindowVM.DeleteTour(MainWindowVM.SelectedIndex);
+            Database db = Database.getInstance();
+
+            db.DeleteTour(MainWindowVM.SelectedTour.Id);
+
+            //int tempid = MainWindowVM.SelectedTour.Id;
+
             MainWindowVM.SelectedTour = null;
+            MainWindowVM.DeleteTour(MainWindowVM.SelectedIndex);
+            //MainWindowVM.Filepath = "";
+
+            //MainWindowVM.DescriptionChecked = true;
+
+
+
+            /*if (File.Exists($"C:\\Users\\flole\\Documents\\FH\\4. Semester\\SWEN2\\TourPlanner Github Project\\img\\img{MainWindowVM.SelectedTour.Id}.png"))
+            {
+                File.Delete($"C:\\Users\\flole\\Documents\\FH\\4. Semester\\SWEN2\\TourPlanner Github Project\\img\\img{tempid}.png");
+            }*/
+
+
+            //File.Delete($"C:\\Users\\flole\\Documents\\FH\\4. Semester\\SWEN2\\TourPlanner Github Project\\img\\img{tempid}.png");
+
         }
     }
 }

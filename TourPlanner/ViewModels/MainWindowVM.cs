@@ -5,18 +5,38 @@ using TourPlanner.BusinessLayer;
 using TourPlanner.Models;
 using TourPlanner.Commands;
 using TourPlanner.DataAccessLayer;
+using System.IO;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
 
 namespace TourPlanner.ViewModels
 {
     public class MainWindowVM : ViewModelBase
     {
+
+        Database db = Database.getInstance();
+
         private ObservableCollection<Tour> tours = new ObservableCollection<Tour>();
         private ITourFactory tourFactory;
         public ICommand OpenDialogCommand { get; }
         public ICommand DeleteTourCommand { get; }
 
-        private string filepath;
-        public string Filepath
+        private ImageSource imgsource; 
+
+        public ImageSource Imgsource {
+            get => imgsource;
+            set
+            {
+                if (imgsource != value)
+                {
+                    imgsource = value;
+                    RaisePropertyChangedEvent();
+                }
+            }
+        }
+
+        private string? filepath;
+        public string? Filepath
         {
             get => filepath;
             set
@@ -99,8 +119,13 @@ namespace TourPlanner.ViewModels
 
                     SelectedTour = ChangeTourSelection(value);
 
-                    Filepath = $"C:\\Users\\flole\\Documents\\FH\\4. Semester\\SWEN2\\TourPlanner Github project\\img\\img{SelectedIndex}.png";
-
+                    if(SelectedTour != null)
+                    {
+                    Filepath = $"C:\\Users\\flole\\Documents\\FH\\4. Semester\\SWEN2\\TourPlanner Github project\\img\\img{SelectedTour.Id}.png";
+                    } else
+                    {
+                        Filepath = "";
+                    }
                 }
             }
         }
@@ -143,7 +168,7 @@ namespace TourPlanner.ViewModels
             {
                 Tours.Add(tour);
             }
-            AddTour(new Tour("Tour6", 6, "description", "Salzburg", "Wien", TransportType.Car, "350km", "3h"));
+            //AddTour(new Tour("Tour6", 6, "description", "Salzburg", "Wien", TransportType.Car, "350km", "3h"));
             
             if(Tours.Count != 0)
             {
@@ -155,10 +180,6 @@ namespace TourPlanner.ViewModels
             DeleteTourCommand = new DeleteTourCommand(this);
 
             DescriptionChecked = true;
-
-            RESTRequest restrequest = new RESTRequest();
-            restrequest.DirectionsRequest();
-            //restrequest.StaticmapRequest();
 
         }
         public void AddTour(Tour tour)
@@ -172,7 +193,11 @@ namespace TourPlanner.ViewModels
         }
         public Tour ChangeTourSelection(int val)
         {
-            return Tours[val];
+            if (val != -1)
+            {
+                return Tours[val];
+            }
+            else return null; 
         }
 
     }

@@ -90,7 +90,7 @@
             <Label Content="{Binding SelectedTour.To}" Grid.Row="3" Grid.Column="1" Foreground="White"/>
             <Label Content="{Binding SelectedTour.TransportType}" Grid.Row="4" Grid.Column="1" Foreground="White"/>
             <Label Content="{Binding SelectedTour.TourDistance}" Grid.Row="5" Grid.Column="1" Foreground="White"/>
-            <Label Content="{Binding SelectedTour.EstimatedRoute}" Grid.Row="6" Grid.Column="1" Foreground="White"/>
+            <Label Content="{Binding SelectedTour.EstimatedTime}" Grid.Row="6" Grid.Column="1" Foreground="White"/>
         </Grid>
 
         <Image Source="{Binding Filepath}" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="5" Visibility="{Binding RouteVisible}"></Image>

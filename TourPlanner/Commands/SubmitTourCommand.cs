@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TourPlanner.ViewModels;
 using TourPlanner.Models;
+using TourPlanner.DataAccessLayer;
 
 namespace TourPlanner.Commands
 {
@@ -35,13 +36,29 @@ namespace TourPlanner.Commands
         }
 
 
-        public override void Execute(object? parameter)
+        public override async void Execute(object? parameter)
         {
-            //Tour tour = new Tour(MainWindowVM.NewTour.Name,7, MainWindowVM.NewTour.Dummy);
-            Tour tour = new Tour(CreationDialogVM.NewTourName, 7, CreationDialogVM.NewTourDescription, CreationDialogVM.NewTourFrom, CreationDialogVM.NewTourTo, CreationDialogVM.NewTourTransportType ,CreationDialogVM.NewTourDistance, CreationDialogVM.NewTourEstimatedTime);
+            Database db = Database.getInstance();
+            RESTRequest restrequest = new RESTRequest();
+
+
+            bool result = await restrequest.DirectionsRequest(CreationDialogVM.NewTourFrom, CreationDialogVM.NewTourTo);
+
+
+
+            db.AddTour(CreationDialogVM.NewTourName, CreationDialogVM.NewTourDescription, CreationDialogVM.NewTourFrom, CreationDialogVM.NewTourTo, CreationDialogVM.NewTourTransportType, restrequest.Distance, restrequest.Time);
+
+            Tour tour = db.GetNewestTour(); 
+
             MainWindowVM.AddTour(tour);
+
+            result = await restrequest.StaticmapRequest(tour.Id);
+
+
+
             CreationDialog.Close();
             
         }
+
     }
 }
