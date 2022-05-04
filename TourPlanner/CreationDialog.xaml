@@ -5,16 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TourPlanner.ViewModels"
         ResizeMode="NoResize"
-        SizeToContent="WidthAndHeight"
         ShowInTaskbar="False"
         WindowStartupLocation="CenterOwner"
         FocusManager.FocusedElement="{Binding ElementName=txtName}"
         mc:Ignorable="d"
-        Title="CreationDialogue" Height="450" Width="800">
+        Title="Enter your Tour credentials" Height="450" Width="800">
 
-    <Window.DataContext>
-        <local:CreationDialogVM/>
-    </Window.DataContext>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
@@ -24,12 +20,27 @@
             <RowDefinition />
             <RowDefinition />
             <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
         </Grid.RowDefinitions>
-        
-        
-        <TextBox Text="{Binding NewTour.Name}" Name="txtName" Grid.Row="0" Grid.Column="0"/>
-        <TextBox Grid.Row="0" Grid.Column="1"/>
-        <Button Name="okButton" Command="{Binding OkCommand}" IsDefault="True" Grid.Row="2" Grid.Column="0">OK</Button>
-        <Button Name="cancelButton" Command="{Binding CancelCommand}" IsCancel="True" Grid.Row="2" Grid.Column="1">Cancel</Button>
+
+        <Label Grid.Row="0" Grid.Column="0">Tourname:*</Label>
+        <Label Grid.Row="1" Grid.Column="0">Tour Description:*</Label>
+        <Label Grid.Row="2" Grid.Column="0">From:*</Label>
+        <Label Grid.Row="3" Grid.Column="0">To:*</Label>
+        <Label Grid.Row="4" Grid.Column="0">Transport Type:*</Label>
+
+        <TextBox Text="{Binding NewTourName}" Name="txtName" Grid.Row="0" Grid.Column="1"/>
+        <TextBox Text="{Binding NewTourDescription}" Grid.Row="1" Grid.Column="1"/>
+        <TextBox Text="{Binding NewTourFrom}" Grid.Row="2" Grid.Column="1"/>
+        <TextBox Text="{Binding NewTourTo}" Grid.Row="3" Grid.Column="1"/>
+        <ComboBox SelectedIndex="{Binding NewTourTransportType}" Grid.Row="4" Grid.Column="1">
+            <ComboBoxItem>Car</ComboBoxItem>
+            <ComboBoxItem>Train</ComboBoxItem>
+            <ComboBoxItem>Bus</ComboBoxItem>
+        </ComboBox>
+        <Button x:Name="SubmitTourButton" IsDefault="True" Grid.Row="7" Grid.Column="0" Content="OK" Background="DarkGray" Foreground="White" Command="{Binding SubmitTour}"/>
+        <Button Name="cancelButton" IsCancel="True" Grid.Row="7" Grid.Column="1" Command="{Binding CancelTour}">Cancel</Button>
     </Grid>
 </Window>

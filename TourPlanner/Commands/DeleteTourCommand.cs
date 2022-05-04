@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using TourPlanner.DataAccessLayer;
 using TourPlanner.Models;
 using TourPlanner.ViewModels;
-using System.IO; 
+using System.IO;
 
 namespace TourPlanner.Commands
 {
@@ -23,7 +23,7 @@ namespace TourPlanner.Commands
 
         public override bool CanExecute(object? parameter)
         {
-            if(MainWindowVM.SelectedTour != null && base.CanExecute(parameter))
+            if (MainWindowVM.SelectedTour != null && base.CanExecute(parameter))
             {
                 return true;
             }
@@ -37,11 +37,11 @@ namespace TourPlanner.Commands
 
             db.DeleteTour(MainWindowVM.SelectedTour.Id);
 
-            if (File.Exists($"C:\\Users\\flole\\OneDrive\\Dokumente\\GitHub\\TourPlanner\\img\\img{MainWindowVM.SelectedTour.Id}.png"))
+            if (File.Exists($"C:\\Users\\flole\\Documents\\FH\\4. Semester\\SWEN2\\TourplannerProj\\img\\img{MainWindowVM.SelectedTour.Id}.png"))
             {
-                File.Delete($"C:\\Users\\flole\\OneDrive\\Dokumente\\GitHub\\TourPlanner\\img\\img{MainWindowVM.SelectedTour.Id}.png");
+                File.Delete($"C:\\Users\\flole\\Documents\\FH\\4. Semester\\SWEN2\\TourplannerProj\\img\\img{MainWindowVM.SelectedTour.Id}.png");
             }
- 
+
             //int tempid = MainWindowVM.SelectedTour.Id;
 
             //MainWindowVM.SelectedTour = null;

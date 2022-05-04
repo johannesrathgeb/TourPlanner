@@ -14,7 +14,7 @@ namespace TourPlanner.BusinessLayer
 
             List<Tour> tourlist = db.GetAllTours();
 
-            return tourlist; 
+            return tourlist;
 
             /*
             return new List<Tour>()
@@ -39,7 +39,7 @@ namespace TourPlanner.BusinessLayer
         {
             ObservableCollection<Tour> NewTours = new ObservableCollection<Tour>(OldTours);
             NewTours.RemoveAt(index);
-            return NewTours; 
+            return NewTours;
         }
 
         public Tour AddTourToDB(string name, string tourdescription, string tourfrom, string tourto, TransportType transporttype, string distance, string estimatedtime)

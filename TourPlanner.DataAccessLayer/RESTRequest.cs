@@ -25,20 +25,20 @@ namespace TourPlanner.DataAccessLayer
         private float lrlat;
         private string coords = string.Empty;
 
-        private string time = string.Empty;
-        public string Time
+        private string? time;
+        public string? Time
         {
             get { return time; }
             set { time = value; }
         }
 
-        private string distance = string.Empty;
+        private string? distance;
 
-        public string Distance
+        public string? Distance
         {
             get { return distance; }
             set { distance = value; }
-        } 
+        }
 
 
         public async Task<bool> DirectionsRequest(string from, string to)
@@ -68,9 +68,7 @@ namespace TourPlanner.DataAccessLayer
 
             var staticmaprequest = await client.GetByteArrayAsync("https://www.mapquestapi.com/staticmap/v5/map?key=qjBgVzUoCbh1zGNWdNnowKkanIK9cADy&size=640,480&defaultMarker=none&zoom=11&rand=737758036&session=" + sessionId + "&boundingBox=" + coords);
 
-            //string imagepath = $"C:\\Users\\flole\\Documents\\FH\\4. Semester\\SWEN2\\TourPlanner Github Project\\img\\img{tourid}.png";
-            string imagepath = $"C:\\Users\\flole\\OneDrive\\Dokumente\\GitHub\\TourPlanner\\img\\img{tourid}.png";
-            //string imagepath = $"../../../../img/img{tourid}.png";
+            string imagepath = $"C:\\Users\\flole\\Documents\\FH\\4. Semester\\SWEN2\\TourplannerProj\\img\\img{tourid}.png";
             File.WriteAllBytesAsync(imagepath, staticmaprequest);
 
             string x = Directory.GetCurrentDirectory();

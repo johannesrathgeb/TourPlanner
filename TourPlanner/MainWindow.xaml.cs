@@ -27,20 +27,6 @@ namespace TourPlanner
             InitializeComponent();
         }
 
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-            var vm = (MainWindowVM)DataContext;
-            ((MainWindowVM)DataContext).OpenDialog += (s, ev) =>
-              {
-                  CreationDialogue dialog = new CreationDialogue();
-                  if (dialog.ShowDialog() == true)
-                  {
-                    var dialogViewModel = (CreationDialogVM)       dialog.DataContext;
-                    vm.NewTour.Name = dialogViewModel.NewTour.Name;
-                    vm.AddCommand.Execute(vm.NewTour);
-                  }
-              };
-        }
     }                   
 }                       
                         

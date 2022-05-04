@@ -20,13 +20,12 @@ namespace TourPlanner
     /// </summary>
     public partial class CreationDialogue : Window
     {
-        public CreationDialogue()
+        public CreationDialogue(MainWindowVM viewmodel)
         {
+
+            DataContext = new CreationDialogVM(viewmodel, this);
             InitializeComponent();
             //var vm = this.DataContext as CreationDialogueViewModel;
-            var vm = (CreationDialogVM)this.DataContext;
-            vm.Ok+=(o, e) => this.DialogResult = true;
-            vm.Cancel+=(o,e) => this.DialogResult = false;
         }
     }
 }

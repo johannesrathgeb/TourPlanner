@@ -6,42 +6,31 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using TourPlanner.Commands;
 using TourPlanner.Models;
 
 namespace TourPlanner.ViewModels
 {
-    internal class CreationDialogVM : ViewModelBase
+    public class CreationDialogVM : ViewModelBase
     {
-        Tour newTour = new Tour();
 
-        public event EventHandler Ok;
-        public event EventHandler Cancel;
+        public ICommand SubmitTour { get; }
+        public ICommand CancelTour { get; }
 
-        public Tour NewTour
+        public string? NewTourName { get; set; }
+        public string? NewTourDescription { get; set; }
+        public string? NewTourFrom { get; set; }
+        public string? NewTourTo { get; set; }
+        public TransportType NewTourTransportType { get; set; }
+        public string? NewTourDistance { get; set; }
+        public string? NewTourEstimatedTime { get; set; }
+
+        public CreationDialogVM(MainWindowVM viewmodel, TourPlanner.CreationDialogue creationdialog)
         {
-            get => newTour;
-            set
-            {
-                if (newTour != value)
-                {
-                    newTour = value;
-                    RaisePropertyChangedEvent(nameof(NewTour));
-                }
-            }
+            SubmitTour = new SubmitTourCommand(viewmodel, this, creationdialog);
+            CancelTour = new CancelTourCommand(creationdialog);
         }
 
-        public ICommand OkCommand { get; init; }
-        public ICommand CancelCommand { get; init; }
 
-        public CreationDialogVM()
-        {
-            this.OkCommand = new DelegateCommand(
-                //canexecute funktioniert nicht, weil NewTour setter nie aufgerufen wird und deswegen NotifyPropertyChanged nie aufgerufen wird.
-
-                //(o) => !String.IsNullOrEmpty(NewTour.Name),
-                (o) => this.Ok?.Invoke(this, EventArgs.Empty));
-
-            this.CancelCommand = new DelegateCommand((o) => this.Cancel?.Invoke(this, EventArgs.Empty));
-        }
     }
 }

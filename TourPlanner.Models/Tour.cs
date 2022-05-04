@@ -8,14 +8,14 @@ namespace TourPlanner.Models
 {
     public class Tour
     {
-        public string? Name { get; set; } 
+        public string Name { get; set; } 
         public int Id { get; set; }
-        public string? TourDescription { get; set; }
-        public string? From { get; set; }
-        public string? To { get; set; } 
-        public TransportType? TransportType { get; set; }
-        public string? TourDistance { get; set; }
-        public string? EstimatedTime { get; set; }
+        public string TourDescription { get; set; }
+        public string From { get; set; }
+        public string To { get; set; } 
+        public TransportType TransportType { get; set; }
+        public string TourDistance { get; set; }
+        public string EstimatedTime{ get; set; }
 
 
 
@@ -35,6 +35,7 @@ namespace TourPlanner.Models
         {
 
         }
+
 
     }
 }

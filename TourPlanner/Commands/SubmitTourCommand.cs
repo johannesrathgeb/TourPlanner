@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using TourPlanner.ViewModels;
 using TourPlanner.Models;
 using TourPlanner.DataAccessLayer;
-using TourPlanner.BusinessLayer; 
+using TourPlanner.BusinessLayer;
 
 namespace TourPlanner.Commands
 {
@@ -33,7 +33,7 @@ namespace TourPlanner.Commands
             {
                 return true;
             }
-            return false; 
+            return false;
         }
 
 
@@ -44,14 +44,14 @@ namespace TourPlanner.Commands
 
             bool result = await restrequest.DirectionsRequest(CreationDialogVM.NewTourFrom, CreationDialogVM.NewTourTo);
 
-            var tour = TourFactory.GetInstance().AddTourToDB(CreationDialogVM.NewTourName, CreationDialogVM.NewTourDescription, CreationDialogVM.NewTourFrom, CreationDialogVM.NewTourTo, CreationDialogVM.NewTourTransportType, restrequest.Distance, restrequest.Time); 
+            var tour = TourFactory.GetInstance().AddTourToDB(CreationDialogVM.NewTourName, CreationDialogVM.NewTourDescription, CreationDialogVM.NewTourFrom, CreationDialogVM.NewTourTo, CreationDialogVM.NewTourTransportType, restrequest.Distance, restrequest.Time);
 
             MainWindowVM.AddTour(tour);
 
             result = await restrequest.StaticmapRequest(tour.Id);
 
-            CreationDialog.Close();
-            
+            CreationDialog.Close(); //testfj
+
         }
 
     }
