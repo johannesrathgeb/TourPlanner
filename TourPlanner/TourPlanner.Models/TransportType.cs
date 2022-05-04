@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace TourPlanner.Models
 {
-    public class Tour
+    public enum TransportType
     {
-        public string Name { get; set; } 
-        public int Id { get; set; } 
+        Car,
+        Train,
+        Bus
     }
 }
