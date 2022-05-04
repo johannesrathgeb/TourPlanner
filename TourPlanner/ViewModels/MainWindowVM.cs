@@ -113,7 +113,7 @@ namespace TourPlanner.ViewModels
 
                     if (SelectedTour != null)
                     {
-                        Filepath = $"C:\\Users\\flole\\Documents\\FH\\4. Semester\\SWEN2\\TourplannerProj\\img\\img{SelectedTour.Id}.png";
+                        Filepath = Path.GetFullPath($"../../../../img/img{SelectedTour.Id}.png");
                         using (var stream = File.Open(Filepath, FileMode.Open))
                         {
                             RouteImageSource = ReadFully(stream);
@@ -200,6 +200,12 @@ namespace TourPlanner.ViewModels
             DeleteTourCommand = new DeleteTourCommand(this);
 
             DescriptionChecked = true;
+
+            //string xyz = "46";
+
+            //string vyyy = Path.GetFullPath($"../../../../img/img{xyz}.png");
+
+
 
         }
         public void AddTour(Tour tour)

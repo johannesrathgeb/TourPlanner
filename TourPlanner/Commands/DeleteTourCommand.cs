@@ -37,9 +37,9 @@ namespace TourPlanner.Commands
 
             db.DeleteTour(MainWindowVM.SelectedTour.Id);
 
-            if (File.Exists($"C:\\Users\\flole\\Documents\\FH\\4. Semester\\SWEN2\\TourplannerProj\\img\\img{MainWindowVM.SelectedTour.Id}.png"))
+            if (File.Exists(Path.GetFullPath($"../../../../img/img{MainWindowVM.SelectedTour.Id}.png")))
             {
-                File.Delete($"C:\\Users\\flole\\Documents\\FH\\4. Semester\\SWEN2\\TourplannerProj\\img\\img{MainWindowVM.SelectedTour.Id}.png");
+                File.Delete(Path.GetFullPath($"../../../../img/img{MainWindowVM.SelectedTour.Id}.png"));
             }
 
             //int tempid = MainWindowVM.SelectedTour.Id;

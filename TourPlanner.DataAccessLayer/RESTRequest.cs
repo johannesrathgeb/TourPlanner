@@ -68,8 +68,10 @@ namespace TourPlanner.DataAccessLayer
 
             var staticmaprequest = await client.GetByteArrayAsync("https://www.mapquestapi.com/staticmap/v5/map?key=qjBgVzUoCbh1zGNWdNnowKkanIK9cADy&size=640,480&defaultMarker=none&zoom=11&rand=737758036&session=" + sessionId + "&boundingBox=" + coords);
 
-            string imagepath = $"C:\\Users\\flole\\Documents\\FH\\4. Semester\\SWEN2\\TourplannerProj\\img\\img{tourid}.png";
-            File.WriteAllBytesAsync(imagepath, staticmaprequest);
+            string imagepath = $"C:\\Users\\flole\\Documents\\FH\\4. Semester\\SWEN2\\TourplannerProj\\Tourplanner\\img\\img{tourid}.png";
+            //File.WriteAllBytesAsync(imagepath, staticmaprequest);
+
+            File.WriteAllBytesAsync(Path.GetFullPath($"../../../../img/img{tourid}.png"), staticmaprequest);
 
             string x = Directory.GetCurrentDirectory();
 
@@ -78,4 +80,3 @@ namespace TourPlanner.DataAccessLayer
 
     }
 }
-
