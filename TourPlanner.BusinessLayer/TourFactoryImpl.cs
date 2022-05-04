@@ -16,18 +16,6 @@ namespace TourPlanner.BusinessLayer
 
             return tourlist;
 
-            /*
-            return new List<Tour>()
-            {
-               
-                new Tour("Tour1", 1, "description1", "Salzburg1", "Wien1", TransportType.Car, "350km1", "1h"),
-                new Tour("Tour2", 2, "description2", "Salzburg2", "Wien2", TransportType.Car, "350km2", "2h"),
-                new Tour("Tour3", 3, "description3", "Salzburg3", "Wien3", TransportType.Car, "350km3", "3h"),
-                new Tour("Tour4", 4, "description4", "Salzburg4", "Wien4", TransportType.Car, "350km4", "4h"),
-                new Tour("Tour5", 5, "description5", "Salzburg5", "Wien5", TransportType.Car, "350km5", "5h")
-             
-            };
-            */
         }
 
         public IEnumerable<Tour> Search(string itemName, bool caseSensitive = false)
@@ -50,6 +38,9 @@ namespace TourPlanner.BusinessLayer
             return db.GetNewestTour();
 
         }
-
+        public void DeleteTourFromDB(int id)
+        {
+            Database.getInstance().DeleteTour(id);
+        }
     }
 }

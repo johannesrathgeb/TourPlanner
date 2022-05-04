@@ -16,5 +16,7 @@ namespace TourPlanner.BusinessLayer
 
         Tour AddTourToDB(string name, string tourdescription, string tourfrom, string tourto, TransportType transporttype, string distance, string time);
 
+        void DeleteTourFromDB(int id); 
+
     }
 }

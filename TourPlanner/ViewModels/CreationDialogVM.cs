@@ -16,21 +16,16 @@ namespace TourPlanner.ViewModels
 
         public ICommand SubmitTour { get; }
         public ICommand CancelTour { get; }
-
         public string? NewTourName { get; set; }
         public string? NewTourDescription { get; set; }
         public string? NewTourFrom { get; set; }
         public string? NewTourTo { get; set; }
         public TransportType NewTourTransportType { get; set; }
-        public string? NewTourDistance { get; set; }
-        public string? NewTourEstimatedTime { get; set; }
 
         public CreationDialogVM(MainWindowVM viewmodel, TourPlanner.CreationDialogue creationdialog)
         {
             SubmitTour = new SubmitTourCommand(viewmodel, this, creationdialog);
             CancelTour = new CancelTourCommand(creationdialog);
         }
-
-
     }
 }

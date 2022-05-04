@@ -8,6 +8,7 @@ using TourPlanner.DataAccessLayer;
 using TourPlanner.Models;
 using TourPlanner.ViewModels;
 using System.IO;
+using TourPlanner.BusinessLayer; 
 
 namespace TourPlanner.Commands
 {
@@ -33,27 +34,13 @@ namespace TourPlanner.Commands
 
         public override void Execute(object? parameter)
         {
-            Database db = Database.getInstance();
-
-            db.DeleteTour(MainWindowVM.SelectedTour.Id);
+            TourFactory.GetInstance().DeleteTourFromDB(MainWindowVM.SelectedTour.Id);
 
             if (File.Exists(Path.GetFullPath($"../../../../img/img{MainWindowVM.SelectedTour.Id}.png")))
             {
                 File.Delete(Path.GetFullPath($"../../../../img/img{MainWindowVM.SelectedTour.Id}.png"));
             }
-
-            //int tempid = MainWindowVM.SelectedTour.Id;
-
-            //MainWindowVM.SelectedTour = null;
             MainWindowVM.DeleteTour(MainWindowVM.SelectedIndex);
-            //MainWindowVM.Filepath = "";
-
-            //MainWindowVM.DescriptionChecked = true;
-
-
-
-            //File.Delete($"C:\\Users\\flole\\Documents\\FH\\4. Semester\\SWEN2\\TourPlanner Github Project\\img\\img{tempid}.png");
-
         }
     }
 }

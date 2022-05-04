@@ -119,13 +119,6 @@ namespace TourPlanner.ViewModels
                             RouteImageSource = ReadFully(stream);
                         }
                         RaisePropertyChangedEvent(nameof(RouteImageSource));
-
-
-
-                        //Filepath = $"C:\\Users\\flole\\Documents\\FH\\4. Semester\\SWEN2\\TourPlanner Github project\\img\\img{SelectedTour.Id}.png";
-                        //Filepath = $"C:\\Users\\flole\\OneDrive\\Dokumente\\GitHub\\TourPlanner\\img\\img{SelectedTour.Id}.png";
-                        //Filepath = $"../../../../img/img{SelectedTour.Id}.png";
-                        //Filepath = $"../../../../img/img2.png";
                     }
                     else
                     {
@@ -201,12 +194,6 @@ namespace TourPlanner.ViewModels
 
             DescriptionChecked = true;
 
-            //string xyz = "46";
-
-            //string vyyy = Path.GetFullPath($"../../../../img/img{xyz}.png");
-
-
-
         }
         public void AddTour(Tour tour)
         {
@@ -225,6 +212,5 @@ namespace TourPlanner.ViewModels
             }
             else return null;
         }
-
     }
 }
