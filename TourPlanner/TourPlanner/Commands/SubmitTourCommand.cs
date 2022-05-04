@@ -50,7 +50,7 @@ namespace TourPlanner.Commands
 
             result = await restrequest.StaticmapRequest(tour.Id);
 
-            CreationDialog.Close(); //test
+            CreationDialog.Close(); //testfj
             
         }
 
