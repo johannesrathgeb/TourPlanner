@@ -5,8 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using TourPlanner.ViewModels;
 using TourPlanner.Models;
-using TourPlanner.DataAccessLayer;
 using TourPlanner.BusinessLayer;
+using System.Windows; 
 
 namespace TourPlanner.Commands
 {
@@ -39,21 +39,20 @@ namespace TourPlanner.Commands
 
         public override async void Execute(object? parameter)
         {
-            Database db = Database.getInstance();
-            RESTRequest restrequest = new RESTRequest();
+            ProcessRestData prd = new ProcessRestData();
+            
+            Tour tour = new Tour(CreationDialogVM.NewTourName, CreationDialogVM.NewTourDescription, CreationDialogVM.NewTourFrom, CreationDialogVM.NewTourTo, CreationDialogVM.NewTourTransportType);
 
-            bool result = await restrequest.DirectionsRequest(CreationDialogVM.NewTourFrom, CreationDialogVM.NewTourTo);
+            tour = await prd.HandleMapRequest(tour);
 
-            var tour = TourFactory.GetInstance().AddTourToDB(CreationDialogVM.NewTourName, CreationDialogVM.NewTourDescription, CreationDialogVM.NewTourFrom, CreationDialogVM.NewTourTo, CreationDialogVM.NewTourTransportType, restrequest.Distance, restrequest.Time);
-
-            MainWindowVM.AddTour(tour);
-
-            result = await restrequest.StaticmapRequest(tour.Id);
-
-            CreationDialog.Close(); 
-
-
+            if(tour == null)
+            {
+                MessageBox.Show("At least one location does not exist or you entered the same location twice!","Invalid Location(s)",MessageBoxButton.OK,MessageBoxImage.Warning);
+            } else
+            {
+                MainWindowVM.AddTour(tour);
+                CreationDialog.Close();
+            }
         }
-
     }
 }

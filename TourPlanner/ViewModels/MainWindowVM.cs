@@ -98,7 +98,7 @@ namespace TourPlanner.ViewModels
 
 
 
-        private int selectedIndex;
+        private int selectedIndex = -1;
         public int SelectedIndex
         {
             get => selectedIndex;
@@ -185,6 +185,7 @@ namespace TourPlanner.ViewModels
 
             if (Tours.Count != 0)
             {
+                SelectedIndex = 0; 
                 SelectedTour = Tours[0];
             }
 
