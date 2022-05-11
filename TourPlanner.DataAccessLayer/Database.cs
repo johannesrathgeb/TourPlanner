@@ -103,9 +103,41 @@ namespace TourPlanner.DataAccessLayer
             disconnect();
         }
 
+        public void UpdateTour(Tour tour)
+        {
+            connect();
+            using (var cmd = new NpgsqlCommand("UPDATE tour SET name = @name, tourdescription = @desc, tourfrom = @from, tourto = @to, transporttype = @type, tourdistance = @dist, estimatedtime = @est WHERE id = @id", connection))
+            {
+                cmd.Parameters.AddWithValue("id", tour.Id);
+                cmd.Parameters.AddWithValue("name", tour.Name);
+                cmd.Parameters.AddWithValue("desc", tour.TourDescription);
+                cmd.Parameters.AddWithValue("from", tour.From);
+                cmd.Parameters.AddWithValue("to", tour.To);
+                cmd.Parameters.AddWithValue("type", (int)tour.TransportType);
+                cmd.Parameters.AddWithValue("dist", tour.TourDistance);
+                cmd.Parameters.AddWithValue("est", tour.EstimatedTime);
+                NpgsqlDataReader reader = cmd.ExecuteReader();
+            }
+            disconnect();
+        }
 
+        public Tour GetTourById(int id)
+        {
 
+            connect();
+            using (var cmd = new NpgsqlCommand("SELECT * FROM tour WHERE id = @id", connection))
+            {
+                cmd.Parameters.AddWithValue("id", id);
+                NpgsqlDataReader reader = cmd.ExecuteReader();
 
-
+                if (reader.HasRows)
+                {
+                    reader.Read();
+                }
+                Tour tour = new Tour((int)reader["id"], (string)reader["name"], (string)reader["tourdescription"], (string)reader["tourfrom"], (string)reader["tourto"], (TransportType)reader["transporttype"], (string)reader["tourdistance"], (string)reader["estimatedtime"]);
+                disconnect();
+                return tour;
+            }
+        }
     }
 }

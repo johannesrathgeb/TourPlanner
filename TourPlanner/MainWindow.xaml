@@ -46,7 +46,7 @@
 
             <Button Grid.Column="0" Content="+" Background="DarkGray" Foreground="White" Command="{Binding OpenDialogCommand}"/>
             <Button Grid.Column="1" Content="-" Background="Gray" Foreground="White" Command="{Binding DeleteTourCommand}"/>
-            <Button Grid.Column="2" Content="[]" Background="LightGray" Foreground="White"/>
+            <Button Grid.Column="2" Content="[]" Background="LightGray" Foreground="White" Command="{Binding OpenEditDialogCommand}"/>
 
         </Grid>
 

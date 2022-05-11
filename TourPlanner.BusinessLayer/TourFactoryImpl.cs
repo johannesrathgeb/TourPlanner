@@ -42,5 +42,11 @@ namespace TourPlanner.BusinessLayer
         {
             Database.getInstance().DeleteTour(id);
         }
+
+        public Tour UpdateTourInDB(Tour tour)
+        {
+            Database.getInstance().UpdateTour(tour);
+            return tour = Database.getInstance().GetTourById(tour.Id);
+        }
     }
 }

@@ -15,7 +15,7 @@ namespace TourPlanner.BusinessLayer
         IEnumerable<Tour> DeleteTour(IEnumerable<Tour> Tours, int index);
 
         Tour AddTourToDB(string name, string tourdescription, string tourfrom, string tourto, TransportType transporttype, string distance, string time);
-
+        Tour UpdateTourInDB(Tour tour);
         void DeleteTourFromDB(int id); 
 
     }

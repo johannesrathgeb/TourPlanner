@@ -40,6 +40,16 @@ namespace TourPlanner.Models
             TransportType = transporttype;
         }
 
+        public Tour(int id, string name, string tourdescription, string from, string to, TransportType transporttype)
+        {
+            Id = id; 
+            Name = name;
+            TourDescription = tourdescription;
+            From = from;
+            To = to;
+            TransportType = transporttype;
+        }
+
 
         public Tour()
         {

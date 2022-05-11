@@ -20,6 +20,7 @@ namespace TourPlanner.ViewModels
         private ITourFactory tourFactory;
         public ICommand OpenDialogCommand { get; }
         public ICommand DeleteTourCommand { get; }
+        public ICommand OpenEditDialogCommand { get; }
 
         public byte[]? RouteImageSource { get; set; }
 
@@ -192,6 +193,8 @@ namespace TourPlanner.ViewModels
             OpenDialogCommand = new OpenDialogCommand(this);
 
             DeleteTourCommand = new DeleteTourCommand(this);
+
+            OpenEditDialogCommand = new OpenEditDialogCommand(this);
 
             DescriptionChecked = true;
 

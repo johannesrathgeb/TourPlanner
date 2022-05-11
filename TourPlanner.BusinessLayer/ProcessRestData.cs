@@ -14,13 +14,19 @@ namespace TourPlanner.BusinessLayer
 
         private RESTRequest restrequest = new RESTRequest(); 
 
-        public async Task<Tour> HandleMapRequest(Tour tour)
+        public async Task<Tour> HandleMapRequest(Tour tour, int mode)
         {
             tour = await restrequest.DirectionsRequest(tour);
 
             if(tour == null) return null;
 
-            tour = TourFactory.GetInstance().AddTourToDB(tour.Name, tour.TourDescription, tour.From, tour.To, tour.TransportType, tour.TourDistance, tour.EstimatedTime);
+            if(mode == 0)
+            {
+                tour = TourFactory.GetInstance().AddTourToDB(tour.Name, tour.TourDescription, tour.From, tour.To, tour.TransportType, tour.TourDistance, tour.EstimatedTime);
+            } else
+            {
+                tour = TourFactory.GetInstance().UpdateTourInDB(tour);
+            }
 
             var staticmaprequest = await restrequest.StaticmapRequest(tour);
 
