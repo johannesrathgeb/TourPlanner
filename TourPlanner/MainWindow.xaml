@@ -17,6 +17,7 @@
             <RowDefinition Height="1*"/>
             <RowDefinition Height="1*"/>
             <RowDefinition Height="10*"/>
+            <RowDefinition Height="4*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="3*" />
@@ -29,7 +30,7 @@
 
         <Label Grid.Row="0" Grid.Column="0" Content="Tours" Background="#FF1B1B1B" Foreground="White"/>
 
-        <ListBox SelectedIndex="{Binding SelectedIndex}" ItemsSource="{Binding Tours, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Row="3" Grid.Column="0" Grid.RowSpan="3" Background="#FF1B1B1B" >
+        <ListBox SelectedIndex="{Binding SelectedIndex}" ItemsSource="{Binding Tours, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Row="3" Grid.Column="0" Grid.RowSpan="4" Background="#FF1B1B1B" >
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding Name}" Foreground="White"/>
@@ -94,5 +95,34 @@
         </Grid>
 
         <Image Source="{Binding RouteImageSource}" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="5" Visibility="{Binding RouteVisible}"></Image>
+
+
+        <Grid Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="5">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="3*"></RowDefinition>
+                <RowDefinition Height="7*"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"></ColumnDefinition>
+                <ColumnDefinition Width="1*"></ColumnDefinition>
+                <ColumnDefinition Width="1*"></ColumnDefinition>
+                <ColumnDefinition Width="10*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <Button Grid.Row="0" Grid.Column="0" Command="{Binding OpenLogsDialogCommand}">+</Button>
+            <Button Grid.Row="0" Grid.Column="1">-</Button>
+            <Button Grid.Row="0" Grid.Column="2">[]</Button>
+            <Label Foreground="White" Grid.Row="0" Grid.Column="3">Tourlogs</Label>
+
+
+            <DataGrid SelectedIndex="{Binding}" Grid.Row="1" Grid.ColumnSpan="5" ItemsSource="{Binding SelectedTour.Tourlogs, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="True" IsReadOnly="True">
+                
+            </DataGrid>
+            
+            
+        </Grid>
+
+
     </Grid>
 </Window>

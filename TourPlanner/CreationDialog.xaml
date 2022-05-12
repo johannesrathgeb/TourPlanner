@@ -40,7 +40,7 @@
             <ComboBoxItem>Train</ComboBoxItem>
             <ComboBoxItem>Bus</ComboBoxItem>
         </ComboBox>
-        <Button x:Name="SubmitTourButton" IsDefault="True" Grid.Row="7" Grid.Column="0" Content="OK" Background="DarkGray" Foreground="White" Command="{Binding SubmitTour}"/>
-        <Button Name="cancelButton" IsCancel="True" Grid.Row="7" Grid.Column="1" Command="{Binding CancelTour}">Cancel</Button>
+        <Button x:Name="SubmitTourButton" IsDefault="True" Grid.Row="5" Grid.Column="0" Content="OK" Background="DarkGray" Foreground="White" Command="{Binding SubmitTour}"/>
+        <Button Name="cancelButton" IsCancel="True" Grid.Row="5" Grid.Column="1" Command="{Binding CancelTour}">Cancel</Button>
     </Grid>
 </Window>

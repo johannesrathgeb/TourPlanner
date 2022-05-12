@@ -48,5 +48,25 @@ namespace TourPlanner.BusinessLayer
             Database.getInstance().UpdateTour(tour);
             return tour = Database.getInstance().GetTourById(tour.Id);
         }
+
+        public Tourlog AddTourlogToDB(int tourid, string date, string comment, int difficulty, string totaltime, int rating)
+        {
+            Database db = Database.getInstance();
+            db.AddTourlog(tourid, date, comment, difficulty, totaltime, rating);
+
+            return db.GetNewestTourlog(); 
+        }
+
+        public IEnumerable<Tourlog> GetTourlogsByIdFromDB()
+        {
+            throw new NotImplementedException();
+        }
+
+        public ObservableCollection<Tourlog> GetTourlogsByIdFromDB(int tourid)
+        {
+            Database db = Database.getInstance();
+
+            return db.GetTourlogsByTourId(tourid);
+        }
     }
 }

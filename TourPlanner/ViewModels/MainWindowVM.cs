@@ -19,6 +19,7 @@ namespace TourPlanner.ViewModels
         private ObservableCollection<Tour> tours = new ObservableCollection<Tour>();
         private ITourFactory tourFactory;
         public ICommand OpenDialogCommand { get; }
+        public ICommand OpenLogsDialogCommand { get; }
         public ICommand DeleteTourCommand { get; }
         public ICommand OpenEditDialogCommand { get; }
 
@@ -182,6 +183,7 @@ namespace TourPlanner.ViewModels
             foreach (Tour tour in this.tourFactory.GetItems())
             {
                 Tours.Add(tour);
+                tour.Tourlogs = this.tourFactory.GetTourlogsByIdFromDB(tour.Id); 
             }
 
             if (Tours.Count != 0)
@@ -191,6 +193,8 @@ namespace TourPlanner.ViewModels
             }
 
             OpenDialogCommand = new OpenDialogCommand(this);
+
+            OpenLogsDialogCommand = new OpenLogsDialogCommand(this); 
 
             DeleteTourCommand = new DeleteTourCommand(this);
 

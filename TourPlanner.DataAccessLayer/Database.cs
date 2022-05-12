@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -52,7 +53,24 @@ namespace TourPlanner.DataAccessLayer
             }
             disconnect();
         }
-        
+
+        public void AddTourlog(int tourid, string date, string comment, int difficulty, string totaltime, int rating)
+        {
+            connect();
+            using (var cmd = new NpgsqlCommand("INSERT INTO tourlog (tourid, date, comment, difficulty, totaltime, rating) VALUES (@tourid, @date, @comment, @difficulty, @totaltime, @rating)", connection))
+            {
+                cmd.Parameters.AddWithValue("tourid", tourid);
+                cmd.Parameters.AddWithValue("date", date);
+                cmd.Parameters.AddWithValue("comment", comment);
+                cmd.Parameters.AddWithValue("difficulty", difficulty);
+                cmd.Parameters.AddWithValue("totaltime", totaltime);
+                cmd.Parameters.AddWithValue("rating", rating);
+
+                cmd.ExecuteNonQuery();
+            }
+            disconnect();
+        }
+
         public List<Tour> GetAllTours()
         {
             connect();
@@ -74,6 +92,29 @@ namespace TourPlanner.DataAccessLayer
             }
         }
 
+        public ObservableCollection<Tourlog> GetTourlogsByTourId(int tourid)
+        {
+            connect();
+            using (var cmd = new NpgsqlCommand("SELECT * FROM tourlog WHERE tourid = @tourid", connection))
+            {
+                cmd.Parameters.AddWithValue("tourid", tourid);
+                NpgsqlDataReader reader = cmd.ExecuteReader();
+                ObservableCollection<Tourlog> loglist = new ObservableCollection<Tourlog>(); 
+                if (reader.HasRows)
+                {
+
+                    while (reader.Read())
+                    {
+                        Tourlog tourlog = new Tourlog((int)reader["logid"], (string)reader["date"], (string)reader["comment"], (int)reader["difficulty"], (string)reader["totaltime"], (int)reader["rating"]);
+                        loglist.Add(tourlog);
+                    }
+                }
+                disconnect();
+                return loglist;
+            }
+        }
+
+
         public Tour GetNewestTour()
         {
             connect();
@@ -89,6 +130,24 @@ namespace TourPlanner.DataAccessLayer
 
                 disconnect();
                 return tour;
+            }
+        }
+
+        public Tourlog GetNewestTourlog()
+        {
+            connect();
+            using (var cmd = new NpgsqlCommand("SELECT * FROM tourlog ORDER BY logid DESC LIMIT 1", connection))
+            {
+                NpgsqlDataReader reader = cmd.ExecuteReader();
+
+                if (reader.HasRows)
+                {
+                    reader.Read();
+                }
+                Tourlog tourlog = new Tourlog((int)reader["logid"], (string)reader["date"], (string)reader["comment"], (int)reader["difficulty"], (string)reader["totaltime"], (int)reader["rating"]);
+
+                disconnect();
+                return tourlog;
             }
         }
 

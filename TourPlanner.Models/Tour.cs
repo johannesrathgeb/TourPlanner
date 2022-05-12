@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,6 +17,7 @@ namespace TourPlanner.Models
         public TransportType TransportType { get; set; }
         public string TourDistance { get; set; }
         public string EstimatedTime{ get; set; }
+        public ObservableCollection<Tourlog> Tourlogs { get; set; } = new ObservableCollection<Tourlog>();
 
 
 

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,7 +17,10 @@ namespace TourPlanner.BusinessLayer
 
         Tour AddTourToDB(string name, string tourdescription, string tourfrom, string tourto, TransportType transporttype, string distance, string time);
         Tour UpdateTourInDB(Tour tour);
-        void DeleteTourFromDB(int id); 
+        void DeleteTourFromDB(int id);
+        Tourlog AddTourlogToDB(int tourid, string date, string comment, int difficulty, string totaltime, int rating);
+
+        ObservableCollection<Tourlog> GetTourlogsByIdFromDB(int tourid); 
 
     }
 }
