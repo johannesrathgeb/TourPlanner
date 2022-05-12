@@ -111,12 +111,12 @@
             </Grid.ColumnDefinitions>
 
             <Button Grid.Row="0" Grid.Column="0" Command="{Binding OpenLogsDialogCommand}">+</Button>
-            <Button Grid.Row="0" Grid.Column="1">-</Button>
-            <Button Grid.Row="0" Grid.Column="2">[]</Button>
+            <Button Grid.Row="0" Grid.Column="1" Command="{Binding DeleteLogCommand}">-</Button>
+            <Button Grid.Row="0" Grid.Column="2" Command="{Binding OpenEditLogsDialogCommand}">[]</Button>
             <Label Foreground="White" Grid.Row="0" Grid.Column="3">Tourlogs</Label>
 
 
-            <DataGrid SelectedIndex="{Binding}" Grid.Row="1" Grid.ColumnSpan="5" ItemsSource="{Binding SelectedTour.Tourlogs, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="True" IsReadOnly="True">
+            <DataGrid RowBackground="Black" Foreground="White" SelectedIndex="{Binding SelectedLogIndex}" Grid.Row="1" Grid.ColumnSpan="5" ItemsSource="{Binding SelectedTour.Tourlogs, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="True" IsReadOnly="True">
                 
             </DataGrid>
             

@@ -22,6 +22,8 @@ namespace TourPlanner.ViewModels
         public ICommand OpenLogsDialogCommand { get; }
         public ICommand DeleteTourCommand { get; }
         public ICommand OpenEditDialogCommand { get; }
+        public ICommand OpenEditLogsDialogCommand { get; }
+        public ICommand DeleteLogCommand { get; }
 
         public byte[]? RouteImageSource { get; set; }
 
@@ -97,7 +99,20 @@ namespace TourPlanner.ViewModels
             }
         }
 
+        private int selectedLogIndex = -1; 
 
+        public int SelectedLogIndex
+        {
+            get => selectedLogIndex;
+            set
+            {
+                if (selectedLogIndex != value)
+                {
+                    selectedLogIndex = value;
+                    RaisePropertyChangedEvent();
+                }
+            }
+        }
 
 
         private int selectedIndex = -1;
@@ -198,7 +213,11 @@ namespace TourPlanner.ViewModels
 
             DeleteTourCommand = new DeleteTourCommand(this);
 
+            DeleteLogCommand = new DeleteLogCommand(this); 
+
             OpenEditDialogCommand = new OpenEditDialogCommand(this);
+
+            OpenEditLogsDialogCommand = new OpenEditLogsDialogCommand(this); 
 
             DescriptionChecked = true;
 
@@ -212,6 +231,12 @@ namespace TourPlanner.ViewModels
         {
             Tours.RemoveAt(index);
         }
+
+        public void DeleteTourlog(int tourindex, int logindex)
+        {
+            Tours[tourindex].Tourlogs.RemoveAt(logindex);
+        }
+
         public Tour ChangeTourSelection(int val)
         {
             if (val != -1)

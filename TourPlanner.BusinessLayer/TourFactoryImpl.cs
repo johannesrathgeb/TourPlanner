@@ -68,5 +68,16 @@ namespace TourPlanner.BusinessLayer
 
             return db.GetTourlogsByTourId(tourid);
         }
+
+        public void DeleteTourlogFromDB(int id)
+        {
+            Database.getInstance().DeleteTourlog(id);
+        }
+
+        public Tourlog UpdateTourlogInDB(Tourlog tourlog)
+        {
+            Database.getInstance().UpdateTourlog(tourlog);
+            return Database.getInstance().GetTourlogByLogId(tourlog.Id); 
+        }
     }
 }
