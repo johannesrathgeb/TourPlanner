@@ -24,6 +24,8 @@ namespace TourPlanner.ViewModels
         public ICommand OpenEditDialogCommand { get; }
         public ICommand OpenEditLogsDialogCommand { get; }
         public ICommand DeleteLogCommand { get; }
+        public ICommand GenerateTourPDFCommand { get; }
+        public ICommand GenerateSummarizePDFCommand { get; }
 
         public byte[]? RouteImageSource { get; set; }
 
@@ -217,7 +219,12 @@ namespace TourPlanner.ViewModels
 
             OpenEditDialogCommand = new OpenEditDialogCommand(this);
 
-            OpenEditLogsDialogCommand = new OpenEditLogsDialogCommand(this); 
+            OpenEditLogsDialogCommand = new OpenEditLogsDialogCommand(this);
+
+            GenerateTourPDFCommand = new GeneratePDFCommand(Tours, 0, this);
+            
+            GenerateSummarizePDFCommand = new GeneratePDFCommand(Tours, 1, this);
+
 
             DescriptionChecked = true;
 

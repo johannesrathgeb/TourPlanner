@@ -52,8 +52,8 @@
         </Grid>
 
         <Button Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Content="File" Background="#FF30A91F" Foreground="White"/>
-        <Button Grid.Row="0" Grid.Column="3" Content="Edit" Background="Orange" Foreground="White"/>
-        <Button Grid.Row="0" Grid.Column="4" Content="Options" Background="#FF2652BD" Foreground="White"/>
+        <Button Grid.Row="0" Grid.Column="3" Content="Generate Summarized Report" Background="Orange" Foreground="White" Command="{Binding GenerateSummarizePDFCommand}"/>
+        <Button Grid.Row="0" Grid.Column="4" Content="Generate Tour Report" Background="#FF2652BD" Foreground="White" Command="{Binding GenerateTourPDFCommand}"/>
         <Button Grid.Row="0" Grid.Column="5" Content="Help" Background="#FFCC3939" Foreground="White"/>
         <TextBox Grid.Row="2" Grid.Column="0" Text="Search" Background="DarkGray" Foreground="White" />
         <Label Content="Title: " Name="BaseLabel" Grid.Row="1" Grid.Column="1" Background="DarkGray" Foreground="White" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" />

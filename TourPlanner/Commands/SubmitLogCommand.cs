@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using TourPlanner.BusinessLayer;
 using TourPlanner.Models;
 using TourPlanner.ViewModels;
@@ -40,7 +41,13 @@ namespace TourPlanner.Commands
         {
             Tourlog tourlog; 
 
-            if(Mode == 0)
+            if (!int.TryParse(LogsCreationDialogVM.NewLogTotaltime, out _))
+            {
+                MessageBox.Show("Enter a valid numer in the [Totaltime] field", "Not a number", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return; 
+            }
+
+            if (Mode == 0)
             {
                 tourlog = TourFactory.GetInstance().AddTourlogToDB(MainWindowVM.SelectedTour.Id, LogsCreationDialogVM.NewLogDate, LogsCreationDialogVM.NewLogComment, LogsCreationDialogVM.NewLogDifficulty + 1, LogsCreationDialogVM.NewLogTotaltime, LogsCreationDialogVM.NewLogRating + 1);
                 MainWindowVM.SelectedTour.Tourlogs.Add(tourlog);
