@@ -13,9 +13,6 @@ namespace TourPlanner.ViewModels
 {
     public class MainWindowVM : ViewModelBase
     {
-
-        Database db = Database.getInstance();
-
         private ObservableCollection<Tour> tours = new ObservableCollection<Tour>();
         private ITourFactory tourFactory;
         public ICommand OpenDialogCommand { get; }
@@ -27,8 +24,9 @@ namespace TourPlanner.ViewModels
         public ICommand GenerateTourPDFCommand { get; }
         public ICommand GenerateSummarizePDFCommand { get; }
 
-        public byte[]? RouteImageSource { get; set; }
+        public ICommand ImportToursCommand { get; }
 
+        public byte[]? RouteImageSource { get; set; }
 
         private string? filepath;
         public string? Filepath
@@ -225,6 +223,7 @@ namespace TourPlanner.ViewModels
             
             GenerateSummarizePDFCommand = new GeneratePDFCommand(Tours, 1, this);
 
+            ImportToursCommand = new ImportToursCommand(this); 
 
             DescriptionChecked = true;
 

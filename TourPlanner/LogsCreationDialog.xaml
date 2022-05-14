@@ -44,6 +44,6 @@
             <ComboBoxItem>5</ComboBoxItem>
         </ComboBox>
         <Button x:Name="SubmitLogButton" IsDefault="True" Grid.Row="5" Grid.Column="0" Content="OK" Background="DarkGray" Foreground="White" Command="{Binding SubmitLog}"/>
-        <Button Name="cancelButton" IsCancel="True" Grid.Row="7" Grid.Column="1" Command="{Binding CancelTour}">Cancel</Button>
+        <Button Name="cancelButton" IsCancel="True" Grid.Row="7" Grid.Column="1" Command="{Binding CancelLog}">Cancel</Button>
     </Grid>
 </Window>

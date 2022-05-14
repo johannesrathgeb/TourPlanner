@@ -12,6 +12,7 @@ namespace TourPlanner.ViewModels
     {
         public int Mode { get; set; }
         public ICommand SubmitLog { get; }
+        public ICommand CancelLog { get; }
         public int NewTourlogID { get; set; }
         public string NewLogDate { get; set; } = String.Empty;
         public string NewLogComment { get; set; } = String.Empty;
@@ -23,8 +24,9 @@ namespace TourPlanner.ViewModels
         {
             Mode = mode; 
             SubmitLog = new SubmitLogCommand(viewmodel, this, logscreationdialog, Mode);
+            CancelLog = new CancelLogCommand(logscreationdialog);
 
-            if(Mode == 1)
+            if (Mode == 1)
             {
                 NewTourlogID = viewmodel.SelectedTour.Tourlogs[viewmodel.SelectedLogIndex].Id; 
                 NewLogDate = viewmodel.SelectedTour.Tourlogs[viewmodel.SelectedLogIndex].Date; 

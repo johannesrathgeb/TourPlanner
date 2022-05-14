@@ -51,7 +51,7 @@
 
         </Grid>
 
-        <Button Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Content="File" Background="#FF30A91F" Foreground="White"/>
+        <Button Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Content="Import Tour" Background="#FF30A91F" Foreground="White" Command="{Binding ImportToursCommand}"/>
         <Button Grid.Row="0" Grid.Column="3" Content="Generate Summarized Report" Background="Orange" Foreground="White" Command="{Binding GenerateSummarizePDFCommand}"/>
         <Button Grid.Row="0" Grid.Column="4" Content="Generate Tour Report" Background="#FF2652BD" Foreground="White" Command="{Binding GenerateTourPDFCommand}"/>
         <Button Grid.Row="0" Grid.Column="5" Content="Help" Background="#FFCC3939" Foreground="White"/>
