@@ -23,8 +23,8 @@ namespace TourPlanner.ViewModels
         public ICommand DeleteLogCommand { get; }
         public ICommand GenerateTourPDFCommand { get; }
         public ICommand GenerateSummarizePDFCommand { get; }
-
         public ICommand ImportToursCommand { get; }
+        public ICommand ExportToursCommand { get; }
 
         public byte[]? RouteImageSource { get; set; }
 
@@ -223,7 +223,8 @@ namespace TourPlanner.ViewModels
             
             GenerateSummarizePDFCommand = new GeneratePDFCommand(Tours, 1, this);
 
-            ImportToursCommand = new ImportToursCommand(this); 
+            ImportToursCommand = new ImportToursCommand(this);
+            ExportToursCommand = new ExportToursCommand(this);
 
             DescriptionChecked = true;
 
@@ -231,7 +232,6 @@ namespace TourPlanner.ViewModels
         public void AddTour(Tour tour)
         {
             Tours.Add(tour);
-
         }
         public void DeleteTour(int index)
         {

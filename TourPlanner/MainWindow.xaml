@@ -51,10 +51,10 @@
 
         </Grid>
 
-        <Button Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Content="Import Tour" Background="#FF30A91F" Foreground="White" Command="{Binding ImportToursCommand}"/>
-        <Button Grid.Row="0" Grid.Column="3" Content="Generate Summarized Report" Background="Orange" Foreground="White" Command="{Binding GenerateSummarizePDFCommand}"/>
+        <Button Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Content="Import Tours" Background="#FF30A91F" Foreground="White" Command="{Binding ImportToursCommand}"/>
+        <Button Grid.Row="0" Grid.Column="3" Content="Export Tours" Background="#FFCC3939" Foreground="White" Command="{Binding ExportToursCommand}"/>
         <Button Grid.Row="0" Grid.Column="4" Content="Generate Tour Report" Background="#FF2652BD" Foreground="White" Command="{Binding GenerateTourPDFCommand}"/>
-        <Button Grid.Row="0" Grid.Column="5" Content="Help" Background="#FFCC3939" Foreground="White"/>
+        <Button Grid.Row="0" Grid.Column="5" Content="Generate Summarized Report" Background="Orange" Foreground="White" Command="{Binding GenerateSummarizePDFCommand}"/>
         <TextBox Grid.Row="2" Grid.Column="0" Text="Search" Background="DarkGray" Foreground="White" />
         <Label Content="Title: " Name="BaseLabel" Grid.Row="1" Grid.Column="1" Background="DarkGray" Foreground="White" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" />
         <Label Content="{Binding SelectedTour.Name}" Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="4" Background="DarkGray" Foreground="White" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
@@ -116,7 +116,7 @@
             <Label Foreground="White" Grid.Row="0" Grid.Column="3">Tourlogs</Label>
 
 
-            <DataGrid RowBackground="Black" Foreground="White" SelectedIndex="{Binding SelectedLogIndex}" Grid.Row="1" Grid.ColumnSpan="5" ItemsSource="{Binding SelectedTour.Tourlogs, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="True" IsReadOnly="True">
+            <DataGrid SelectedIndex="{Binding SelectedLogIndex}" Grid.Row="1" Grid.ColumnSpan="5" ItemsSource="{Binding SelectedTour.Tourlogs, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="True" IsReadOnly="True">
                 
             </DataGrid>
             

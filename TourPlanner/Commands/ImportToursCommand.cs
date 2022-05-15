@@ -40,7 +40,7 @@ namespace TourPlanner.Commands
                 {
                     MainWindowVM.Tours.Add(tour);
                 }
-
+                MessageBox.Show("Tours have successfully been imported!", "Tours imported", MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
     }

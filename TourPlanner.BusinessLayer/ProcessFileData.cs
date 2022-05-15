@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -22,9 +23,6 @@ namespace TourPlanner.BusinessLayer
             string tourdata = fileaccess.GetTourData(filepath);
             dynamic? jsoncontent = JsonNode.Parse(tourdata);
 
-            string ooo = jsoncontent[0]["Tourlogs"][0]["Date"].ToString(); 
-            //string iii = jsoncontent[1]["Tourlogs"]["Date"].ToString(); 
-
             for(int i = 0; i < jsoncontent.Count; i++)
             {
                 int tt = (int)jsoncontent[i]["TransportType"]; 
@@ -34,21 +32,18 @@ namespace TourPlanner.BusinessLayer
 
                 for (int j = 0; j < jsoncontent[i]["Tourlogs"].Count; j++)
                 {
-                    Tourlog tourlog = new Tourlog(jsoncontent[i]["Tourlogs"][j]["Date"].ToString(), jsoncontent[i]["Tourlogs"][j]["Comment"].ToString(), (int)jsoncontent[i]["Tourlogs"][j]["Difficulty"], jsoncontent[i]["Tourlogs"][j]["Totaltime"].ToString(), (int)jsoncontent[i]["Tourlogs"][j]["Rating"]);
-                    tourlog = TourFactory.GetInstance().AddTourlogToDB(tour.Id ,jsoncontent[i]["Tourlogs"][j]["Date"].ToString(), jsoncontent[i]["Tourlogs"][j]["Comment"].ToString(), (int)jsoncontent[i]["Tourlogs"][j]["Difficulty"], jsoncontent[i]["Tourlogs"][j]["Totaltime"].ToString(), (int)jsoncontent[i]["Tourlogs"][j]["Rating"]);
+                    Tourlog tourlog = TourFactory.GetInstance().AddTourlogToDB(tour.Id ,jsoncontent[i]["Tourlogs"][j]["Date"].ToString(), jsoncontent[i]["Tourlogs"][j]["Comment"].ToString(), (int)jsoncontent[i]["Tourlogs"][j]["Difficulty"], jsoncontent[i]["Tourlogs"][j]["Totaltime"].ToString(), (int)jsoncontent[i]["Tourlogs"][j]["Rating"]);
                     tour.Tourlogs.Add(tourlog);
-
-
-
                 }
-
                 tourlist.Add(tour);
             }
-
-            return tourlist; 
-
+            return tourlist;
         }
 
-
+        public void ExportTours(string tourdata, SaveFileDialog sfd)
+        {
+            FileAccess fileaccess = new FileAccess();
+            fileaccess.SaveTourData(tourdata, sfd);
+        }
     }
 }
