@@ -55,7 +55,23 @@
         <Button Grid.Row="0" Grid.Column="3" Content="Export Tours" Background="#FFCC3939" Foreground="White" Command="{Binding ExportToursCommand}"/>
         <Button Grid.Row="0" Grid.Column="4" Content="Generate Tour Report" Background="#FF2652BD" Foreground="White" Command="{Binding GenerateTourPDFCommand}"/>
         <Button Grid.Row="0" Grid.Column="5" Content="Generate Summarized Report" Background="Orange" Foreground="White" Command="{Binding GenerateSummarizePDFCommand}"/>
-        <TextBox Grid.Row="2" Grid.Column="0" Text="Search" Background="DarkGray" Foreground="White" />
+
+        <Grid Grid.Row="2" Grid.Column="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <TextBox Grid.Row="0" Grid.Column="0" Text="{Binding SearchText}" Background="DarkGray" Foreground="White"/>
+            <Button Grid.Row="0" Grid.Column="1" Content="Search" Background="LightGray" Foreground="Black" Command="{Binding GetSearchedToursCommand}"/>
+            <Button Grid.Row="0" Grid.Column="2" Content="Clear" Background="LightGray" Foreground="Black" Command="{Binding ClearSearchedToursCommand}"/>
+        </Grid>
+        
         <Label Content="Title: " Name="BaseLabel" Grid.Row="1" Grid.Column="1" Background="DarkGray" Foreground="White" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" />
         <Label Content="{Binding SelectedTour.Name}" Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="4" Background="DarkGray" Foreground="White" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
         <RadioButton Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Foreground="White" IsChecked="{Binding DescriptionChecked}">Description</RadioButton>

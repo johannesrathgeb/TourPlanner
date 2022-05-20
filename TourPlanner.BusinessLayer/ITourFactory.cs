@@ -11,7 +11,7 @@ namespace TourPlanner.BusinessLayer
     public interface ITourFactory
     {
         IEnumerable<Tour> GetItems();
-        IEnumerable<Tour> Search(string itemName, bool caseSensitive = false);
+        IEnumerable<Tour> SearchInDB(string itemName);
 
         IEnumerable<Tour> DeleteTour(IEnumerable<Tour> Tours, int index);
 

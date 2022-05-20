@@ -15,17 +15,16 @@ namespace TourPlannerTests
         [Test]
         public async Task DirectionsRequestReturnsValues()
         {
+            //ARRANGE
             Tour tour = new Tour("Testtour", "Test Description", "Wien", "Salzburg", TransportType.Bus);
 
             RESTRequest rq = new RESTRequest(); 
 
+            //ACT
             tour = await rq.DirectionsRequest(tour);
 
-            if(tour.TourDistance == null || tour.EstimatedTime == null)
-            {
-            Assert.Fail();
-            }
-            Assert.Pass();
+            //ASSERT
+            Assert.IsNotNull(tour.TourDistance, tour.EstimatedTime);
         }
     }
 }

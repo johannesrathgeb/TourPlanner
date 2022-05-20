@@ -26,6 +26,9 @@ namespace TourPlanner.ViewModels
         public ICommand ImportToursCommand { get; }
         public ICommand ExportToursCommand { get; }
 
+        public ICommand GetSearchedToursCommand { get; }
+        public ICommand ClearSearchedToursCommand { get; }
+
         public byte[]? RouteImageSource { get; set; }
 
         private string? filepath;
@@ -41,6 +44,21 @@ namespace TourPlanner.ViewModels
                 }
             }
         }
+
+        private string? searchText;
+        public string? SearchText
+        {
+            get => searchText;
+            set
+            {
+                if (searchText != value)
+                {
+                    searchText = value;
+                    RaisePropertyChangedEvent();
+                }
+            }
+        }
+
 
         private string informationVisible;
         private string routeVisible;
@@ -224,7 +242,12 @@ namespace TourPlanner.ViewModels
             GenerateSummarizePDFCommand = new GeneratePDFCommand(Tours, 1, this);
 
             ImportToursCommand = new ImportToursCommand(this);
+
             ExportToursCommand = new ExportToursCommand(this);
+
+            GetSearchedToursCommand = new GetSearchedToursCommand(this);
+
+            ClearSearchedToursCommand = new ClearSearchedToursCommand(this);
 
             DescriptionChecked = true;
 
