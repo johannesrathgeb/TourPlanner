@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -39,12 +40,20 @@ namespace TourPlanner.Commands
 
         public override void Execute(object? parameter)
         {
+            DateTime s;
+            CalcComputedAttributes cc = new CalcComputedAttributes(); 
             Tourlog tourlog; 
 
             if (!int.TryParse(LogsCreationDialogVM.NewLogTotaltime, out _))
             {
-                MessageBox.Show("Enter a valid numer in the [Totaltime] field", "Not a number", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show("Enter a valid number in the [Total Time] field", "Not a number", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return; 
+            }
+            //var dateFormats = new[] { "dd.MM.yyyy", "dd-MM-yyyy", "dd/MM/yyyy", "dd.M.yyyy", "dd-M.yyyy", "dd/M/yyyy", "d.MM.yyyy", "d-MM-yyyy", "d/MM/YYYY", "d.M.yyyy", "d-M-yyyy", "d/M/yyyy" };
+            if (!DateTime.TryParseExact(LogsCreationDialogVM.NewLogDate,"dd.MM.yyyy", DateTimeFormatInfo.InvariantInfo, DateTimeStyles.None, out s))
+            {
+                MessageBox.Show("Please enter a valid date! [dd.MM.yyyy]", "Invalid Date Format", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
             }
 
             if (Mode == 0)
@@ -57,6 +66,7 @@ namespace TourPlanner.Commands
                 tourlog = TourFactory.GetInstance().UpdateTourlogInDB(tourlog);
                 MainWindowVM.SelectedTour.Tourlogs[MainWindowVM.SelectedLogIndex] = tourlog; 
             }
+
             LogsCreationDialog.Close();
         }
     }

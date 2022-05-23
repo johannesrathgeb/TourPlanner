@@ -20,10 +20,10 @@
             <RowDefinition />
         </Grid.RowDefinitions>
 
-        <Label Grid.Row="0" Grid.Column="0">Date:*</Label>
+        <Label Grid.Row="0" Grid.Column="0">Date:* [dd.MM.yyyy]</Label>
         <Label Grid.Row="1" Grid.Column="0">Comment:*</Label>
         <Label Grid.Row="2" Grid.Column="0">Difficulty:*</Label>
-        <Label Grid.Row="3" Grid.Column="0">Total Time:*</Label>
+        <Label Grid.Row="3" Grid.Column="0">Total Time (in minutes):*</Label>
         <Label Grid.Row="4" Grid.Column="0">Rating:*</Label>
 
         <TextBox Text="{Binding NewLogDate}" Grid.Row="0" Grid.Column="1"/>

@@ -213,10 +213,14 @@ namespace TourPlanner.ViewModels
 
             this.tourFactory = TourFactory.GetInstance();
             Tours = new ObservableCollection<Tour>();
+            CalcComputedAttributes cc = new CalcComputedAttributes(); 
             foreach (Tour tour in this.tourFactory.GetItems())
             {
                 Tours.Add(tour);
-                tour.Tourlogs = this.tourFactory.GetTourlogsByIdFromDB(tour.Id); 
+                tour.Tourlogs = this.tourFactory.GetTourlogsByIdFromDB(tour.Id);
+
+                tour.Popularity = cc.CalcPopularity(tour);
+                tour.ChildFriendliness = cc.CalcChildFriendliness(tour);
             }
 
             if (Tours.Count != 0)
@@ -238,7 +242,7 @@ namespace TourPlanner.ViewModels
             OpenEditLogsDialogCommand = new OpenEditLogsDialogCommand(this);
 
             GenerateTourPDFCommand = new GeneratePDFCommand(Tours, 0, this);
-            
+
             GenerateSummarizePDFCommand = new GeneratePDFCommand(Tours, 1, this);
 
             ImportToursCommand = new ImportToursCommand(this);
@@ -274,5 +278,6 @@ namespace TourPlanner.ViewModels
             }
             else return null;
         }
+
     }
 }

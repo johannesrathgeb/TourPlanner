@@ -17,6 +17,8 @@ namespace TourPlanner.Models
         public TransportType TransportType { get; set; }
         public string TourDistance { get; set; }
         public string EstimatedTime{ get; set; }
+        public int Popularity { get; set; }
+        public int ChildFriendliness{ get; set; }
         public ObservableCollection<Tourlog> Tourlogs { get; set; } = new ObservableCollection<Tourlog>();
 
 

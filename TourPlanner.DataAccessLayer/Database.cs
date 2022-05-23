@@ -4,20 +4,29 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using Npgsql;
-using TourPlanner.Models;   
+using TourPlanner.Models;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Configuration.Json;
 
 namespace TourPlanner.DataAccessLayer
 {
     public class Database
     {
-        const string connectionstring = "Host=localhost;Username=postgres;Password=;Database=Tourplanner";
+        IConfiguration config = new ConfigurationBuilder()
+            .AddJsonFile("appsettings.json", false, true)
+            .Build();
+
+
+        string connectionstring;
         private NpgsqlConnection connection;
 
         static Database instance = new Database();
         Database()
         {
-
+            connectionstring = $"Host={config["database:host"]};Username={config["database:username"]};Password={config["database:password"]};Database={config["database:dbname"]}";
+            //MessageBox.Show($"Host={config["database:host"]};Username={config["database:username"]};Password=;Database={config["database:dbname"]}", "POG", MessageBoxButton.OK, MessageBoxImage.Exclamation);
         }
 
         public static Database getInstance()
@@ -28,7 +37,16 @@ namespace TourPlanner.DataAccessLayer
         public NpgsqlConnection connect()
         {
             connection = new NpgsqlConnection(connectionstring);
+
+            try
+            {
             connection.Open();
+            } catch (System.Net.Sockets.SocketException ex)
+            {
+                MessageBox.Show(ex.Message, "Invalid Database credentials", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+
+
             return connection;
         }
 

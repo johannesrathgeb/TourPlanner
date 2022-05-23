@@ -87,6 +87,8 @@
                 <RowDefinition Height="2*"/>
                 <RowDefinition Height="2*"/>
                 <RowDefinition Height="2*"/>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="2*"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*" />
@@ -100,6 +102,8 @@
             <Label Grid.Row="4" Grid.Column="0" Foreground="White">Transport Type:</Label>
             <Label Grid.Row="5" Grid.Column="0" Foreground="White">Tour Distance:</Label>
             <Label Grid.Row="6" Grid.Column="0" Foreground="White">Estimated Time:</Label>
+            <Label Grid.Row="7" Grid.Column="0" Foreground="White">Popularity:</Label>
+            <Label Grid.Row="8" Grid.Column="0" Foreground="White">Child-friendliness:</Label>
 
             <Label Content="{Binding SelectedTour.Name}" Grid.Row="0" Grid.Column="1" Foreground="White"/>
             <Label Content="{Binding SelectedTour.TourDescription}" Grid.Row="1" Grid.Column="1" Foreground="White"/>
@@ -108,6 +112,8 @@
             <Label Content="{Binding SelectedTour.TransportType}" Grid.Row="4" Grid.Column="1" Foreground="White"/>
             <Label Content="{Binding SelectedTour.TourDistance}" Grid.Row="5" Grid.Column="1" Foreground="White"/>
             <Label Content="{Binding SelectedTour.EstimatedTime}" Grid.Row="6" Grid.Column="1" Foreground="White"/>
+            <Label Content="{Binding SelectedTour.Popularity}" Grid.Row="7" Grid.Column="1" Foreground="White"/>
+            <Label Content="{Binding SelectedTour.ChildFriendliness}" Grid.Row="8" Grid.Column="1" Foreground="White"/>
         </Grid>
 
         <Image Source="{Binding RouteImageSource}" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="5" Visibility="{Binding RouteVisible}"></Image>
