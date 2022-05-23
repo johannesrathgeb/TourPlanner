@@ -9,12 +9,15 @@ using System.Net.Http;
 using Newtonsoft.Json;
 using System.Globalization;
 using TourPlanner.Models;
-using System.Text.Json.Nodes; 
+using System.Text.Json.Nodes;
+using log4net.Core;
 
-namespace TourPlanner.DataAccessLayer
+namespace TourPlanner.DataAccessLayer 
 {
-    public class RESTRequest
+    public class RESTRequest //impl interface
     {
+        //private static ILoggerWrapper? logger; 
+
         private HttpClient client = new HttpClient();
 
         private string key = "qjBgVzUoCbh1zGNWdNnowKkanIK9cADy";
@@ -26,6 +29,7 @@ namespace TourPlanner.DataAccessLayer
             dynamic? jsoncontent = JsonNode.Parse(directionsrequest);
 
             var status = jsoncontent["info"]["statuscode"].ToString();
+
             if(jsoncontent["info"]["statuscode"].ToString() != "0" || jsoncontent["route"]["distance"].ToString() == "0")
             {
                 return null;
@@ -34,6 +38,13 @@ namespace TourPlanner.DataAccessLayer
             tour.EstimatedTime = jsoncontent["route"]["formattedTime"].ToString();
             return tour;
         }
+
+        /*
+        public void SetDependency(ILoggerWrapper loggerWrapper)
+        {
+            logger = loggerWrapper;
+        }
+        */
 
         public async Task<byte[]> StaticmapRequest(Tour tour)
         {

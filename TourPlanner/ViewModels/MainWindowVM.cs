@@ -8,6 +8,7 @@ using TourPlanner.DataAccessLayer;
 using System.IO;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using TourPlanner.BusinessLayer.Logging;
 
 namespace TourPlanner.ViewModels
 {
@@ -254,7 +255,6 @@ namespace TourPlanner.ViewModels
             ClearSearchedToursCommand = new ClearSearchedToursCommand(this);
 
             DescriptionChecked = true;
-
         }
         public void AddTour(Tour tour)
         {

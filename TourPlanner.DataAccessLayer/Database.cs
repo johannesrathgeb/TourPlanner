@@ -18,7 +18,6 @@ namespace TourPlanner.DataAccessLayer
             .AddJsonFile("appsettings.json", false, true)
             .Build();
 
-
         string connectionstring;
         private NpgsqlConnection connection;
 
@@ -26,7 +25,6 @@ namespace TourPlanner.DataAccessLayer
         Database()
         {
             connectionstring = $"Host={config["database:host"]};Username={config["database:username"]};Password={config["database:password"]};Database={config["database:dbname"]}";
-            //MessageBox.Show($"Host={config["database:host"]};Username={config["database:username"]};Password=;Database={config["database:dbname"]}", "POG", MessageBoxButton.OK, MessageBoxImage.Exclamation);
         }
 
         public static Database getInstance()

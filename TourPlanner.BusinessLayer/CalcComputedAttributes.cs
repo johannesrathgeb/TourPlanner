@@ -13,7 +13,6 @@ namespace TourPlanner.BusinessLayer
     {
         public int CalcPopularity(Tour tour)
         {
-
             if(tour.Tourlogs.Count == 0)
             {
                 return -1; 
@@ -40,7 +39,6 @@ namespace TourPlanner.BusinessLayer
                 return 5;
             }
         }
-
         public int CalcChildFriendliness(Tour tour)
         {
             if(tour.Tourlogs.Count == 0)
@@ -50,12 +48,10 @@ namespace TourPlanner.BusinessLayer
 
             int difficulty = CalcDifficulty(tour);
             int totaltimes = CalcTotalTimes(tour);
-            //int distance = CalcDistance((int)float.Parse(tour.TourDistance));
             int distance = CalcDistance((int)Convert.ToDouble(tour.TourDistance, CultureInfo.InvariantCulture.NumberFormat));
 
             return (((difficulty + totaltimes + distance) / 3) - 5) * (-1);
         }
-
         public int CalcDifficulty(Tour tour)
         {
             int difficulty = 0;
@@ -71,7 +67,6 @@ namespace TourPlanner.BusinessLayer
             }
             return difficulty / tour.Tourlogs.Count;
         }
-
         public int CalcTotalTimes(Tour tour)
         {
             int totaltimes = 0;
@@ -105,7 +100,6 @@ namespace TourPlanner.BusinessLayer
             }
 
         }
-
         public int CalcDistance(int distance)
         {
             if(distance < 50)
@@ -125,8 +119,5 @@ namespace TourPlanner.BusinessLayer
                 return 5; 
             }
         }
-
-
-
     }
 }
