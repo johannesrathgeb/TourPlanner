@@ -8,7 +8,6 @@ using TourPlanner.DataAccessLayer;
 using System.IO;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using TourPlanner.BusinessLayer.Logging;
 
 namespace TourPlanner.ViewModels
 {

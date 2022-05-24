@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TourPlanner.BusinessLayer.Logging
+namespace TourPlanner.Logging
 {
     public class Log4NetWrapper : ILoggerWrapper
     {

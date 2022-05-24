@@ -4,7 +4,6 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TourPlanner.BusinessLayer.Logging;
 using TourPlanner.DataAccessLayer;
 using TourPlanner.Models; 
 
@@ -18,8 +17,6 @@ namespace TourPlanner.BusinessLayer
 
         public async Task<Tour> HandleMapRequest(Tour tour, int mode)
         {
-            //((IDataAccessDependency)restrequest).SetDependency((log4net.Core.ILoggerWrapper)LoggerFactory.GetLogger());
-
             tour = await restrequest.DirectionsRequest(tour);
 
             if(tour == null) return null;
