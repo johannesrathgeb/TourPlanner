@@ -35,6 +35,17 @@ namespace TourPlanner.Models
             EstimatedTime = estimatedtime;
         }
 
+        public Tour(string name, string tourdescription, string from, string to, TransportType transporttype, string tourdistance, string estimatedtime)
+        {
+            Name = name;
+            TourDescription = tourdescription;
+            From = from;
+            To = to;
+            TransportType = transporttype;
+            TourDistance = tourdistance;
+            EstimatedTime = estimatedtime;
+        }
+
         public Tour(string name, string tourdescription, string from, string to, TransportType transporttype)
         {
             Name = name;

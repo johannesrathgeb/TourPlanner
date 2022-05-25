@@ -9,13 +9,14 @@ using Npgsql;
 using TourPlanner.Models;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Configuration.Json;
+using System.IO;
 
 namespace TourPlanner.DataAccessLayer
 {
     public class Database
     {
         IConfiguration config = new ConfigurationBuilder()
-            .AddJsonFile("appsettings.json", false, true)
+            .AddJsonFile(Path.GetFullPath("../../../../config/appsettings.json"), false, true)
             .Build();
 
         string connectionstring;
@@ -283,6 +284,5 @@ namespace TourPlanner.DataAccessLayer
                 return tourlist;
             }
         }
-
     }
 }

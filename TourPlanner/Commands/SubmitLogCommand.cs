@@ -67,6 +67,9 @@ namespace TourPlanner.Commands
                 MainWindowVM.SelectedTour.Tourlogs[MainWindowVM.SelectedLogIndex] = tourlog; 
             }
 
+            MainWindowVM.SelectedTour.Popularity = cc.CalcPopularity(MainWindowVM.SelectedTour);
+            MainWindowVM.SelectedTour.ChildFriendliness = cc.CalcChildFriendliness(MainWindowVM.SelectedTour);
+
             LogsCreationDialog.Close();
         }
     }

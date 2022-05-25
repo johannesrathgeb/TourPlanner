@@ -14,7 +14,6 @@ namespace TourPlanner.DataAccessLayer
         {
             return File.ReadAllText(filepath); 
         }
-
         public void SaveTourData(string tourcontent, SaveFileDialog sfd)
         {
             StreamWriter writer = new StreamWriter(sfd.OpenFile());

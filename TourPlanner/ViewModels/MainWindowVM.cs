@@ -178,7 +178,6 @@ namespace TourPlanner.ViewModels
             }
         }
 
-
         private Tour? selectedTour;
 
         public Tour? SelectedTour

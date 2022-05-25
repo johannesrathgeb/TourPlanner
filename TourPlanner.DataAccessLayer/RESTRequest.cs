@@ -24,8 +24,6 @@ namespace TourPlanner.DataAccessLayer
 
         public async Task<Tour> DirectionsRequest(Tour tour)
         {
-            logger.Fatal("Map created!");
-
             string directionsrequest = await client.GetStringAsync($"http://www.mapquestapi.com/directions/v2/route?key={key}&from={tour.From}&to={tour.To}&unit=k");
 
             dynamic? jsoncontent = JsonNode.Parse(directionsrequest);

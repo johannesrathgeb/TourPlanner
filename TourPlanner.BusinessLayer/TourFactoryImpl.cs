@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Moq;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -7,12 +8,15 @@ using TourPlanner.Models;
 
 namespace TourPlanner.BusinessLayer
 {
-    internal class TourFactoryImpl : ITourFactory
+    public class TourFactoryImpl : ITourFactory
     {
+        private readonly Database db; 
+        public TourFactoryImpl()
+        {
+            db = Database.getInstance(); 
+        }
         public IEnumerable<Tour> GetItems()
         {
-            Database db = Database.getInstance();
-
             List<Tour> tourlist = db.GetAllTours();
 
             return tourlist;
@@ -23,7 +27,6 @@ namespace TourPlanner.BusinessLayer
         {
            IEnumerable<Tour> tourlist = GetItems();
 
-            Database db = Database.getInstance();
 
             return db.SearchText(itemName.ToLower()); 
 
@@ -39,7 +42,6 @@ namespace TourPlanner.BusinessLayer
 
         public Tour AddTourToDB(string name, string tourdescription, string tourfrom, string tourto, TransportType transporttype, string distance, string estimatedtime)
         {
-            Database db = Database.getInstance();
             db.AddTour(name, tourdescription, tourfrom, tourto, transporttype, distance, estimatedtime);
 
             return db.GetNewestTour();
@@ -47,43 +49,35 @@ namespace TourPlanner.BusinessLayer
         }
         public void DeleteTourFromDB(int id)
         {
-            Database.getInstance().DeleteTour(id);
+            db.DeleteTour(id);
         }
 
         public Tour UpdateTourInDB(Tour tour)
         {
-            Database.getInstance().UpdateTour(tour);
+            db.UpdateTour(tour);
             return tour = Database.getInstance().GetTourById(tour.Id);
         }
 
         public Tourlog AddTourlogToDB(int tourid, string date, string comment, int difficulty, string totaltime, int rating)
         {
-            Database db = Database.getInstance();
             db.AddTourlog(tourid, date, comment, difficulty, totaltime, rating);
 
             return db.GetNewestTourlog(); 
         }
 
-        public IEnumerable<Tourlog> GetTourlogsByIdFromDB()
-        {
-            throw new NotImplementedException();
-        }
-
         public ObservableCollection<Tourlog> GetTourlogsByIdFromDB(int tourid)
         {
-            Database db = Database.getInstance();
-
             return db.GetTourlogsByTourId(tourid);
         }
 
         public void DeleteTourlogFromDB(int id)
         {
-            Database.getInstance().DeleteTourlog(id);
+            db.DeleteTourlog(id);
         }
 
         public Tourlog UpdateTourlogInDB(Tourlog tourlog)
         {
-            Database.getInstance().UpdateTourlog(tourlog);
+            db.UpdateTourlog(tourlog);
             return Database.getInstance().GetTourlogByLogId(tourlog.Id); 
         }
     }

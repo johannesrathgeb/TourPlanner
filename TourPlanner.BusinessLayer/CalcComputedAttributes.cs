@@ -15,7 +15,7 @@ namespace TourPlanner.BusinessLayer
         {
             if(tour.Tourlogs.Count == 0)
             {
-                return -1; 
+                return 0; 
             }
 
             if (tour.Tourlogs.Count < 2)
@@ -43,12 +43,13 @@ namespace TourPlanner.BusinessLayer
         {
             if(tour.Tourlogs.Count == 0)
             {
-                return -1; 
+                return 0; 
             }
 
             int difficulty = CalcDifficulty(tour);
             int totaltimes = CalcTotalTimes(tour);
             int distance = CalcDistance((int)Convert.ToDouble(tour.TourDistance, CultureInfo.InvariantCulture.NumberFormat));
+
 
             return (((difficulty + totaltimes + distance) / 3) - 5) * (-1);
         }
@@ -88,10 +89,10 @@ namespace TourPlanner.BusinessLayer
             } else if(totaltimes < 60 && totaltimes >= 30)
             {
                 return 2; 
-            } else if(totaltimes < 90 && totaltimes >= 60)
+            } else if(totaltimes < 120 && totaltimes >= 60)
             {
                 return 3;
-            } else if(totaltimes < 120 && totaltimes >= 90)
+            } else if(totaltimes < 150 && totaltimes >= 120)
             {
                 return 4;
             } else

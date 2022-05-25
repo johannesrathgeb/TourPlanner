@@ -28,8 +28,13 @@ namespace TourPlanner.Commands
 
         public override void Execute(object? parameter)
         {
+            CalcComputedAttributes cc = new CalcComputedAttributes();
+
             TourFactory.GetInstance().DeleteTourlogFromDB(MainWindowVM.SelectedTour.Tourlogs[MainWindowVM.SelectedLogIndex].Id);
             MainWindowVM.DeleteTourlog(MainWindowVM.SelectedIndex, MainWindowVM.SelectedLogIndex);
+
+            MainWindowVM.SelectedTour.Popularity = cc.CalcPopularity(MainWindowVM.SelectedTour);
+            MainWindowVM.SelectedTour.ChildFriendliness = cc.CalcChildFriendliness(MainWindowVM.SelectedTour);
         }
     }
 }
