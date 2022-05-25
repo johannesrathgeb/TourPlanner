@@ -29,7 +29,23 @@ namespace TourPlanner.ViewModels
         public ICommand GetSearchedToursCommand { get; }
         public ICommand ClearSearchedToursCommand { get; }
 
+        public ICommand TourViewUpdateCommand { get; }
+
         public byte[]? RouteImageSource { get; set; }
+
+
+        public TourViewVM TourVM { get; set; }
+        private object _currentView;
+
+        public object CurrentView
+        {
+            get { return _currentView; }
+            set
+            {
+                _currentView = value;
+                RaisePropertyChangedEvent();
+            }
+        }
 
         private string? filepath;
         public string? Filepath
@@ -154,6 +170,8 @@ namespace TourPlanner.ViewModels
                             RouteImageSource = ReadFully(stream);
                         }
                         RaisePropertyChangedEvent(nameof(RouteImageSource));
+                        
+
                     }
                     else
                     {
@@ -189,6 +207,11 @@ namespace TourPlanner.ViewModels
                 if (selectedTour != value)
                 {
                     selectedTour = value;
+                    if(selectedTour != null)
+                    {
+                        TourVM.updateSelectedTour(selectedTour);
+                    }
+                    
                     RaisePropertyChangedEvent();
                 }
             }
@@ -210,6 +233,8 @@ namespace TourPlanner.ViewModels
 
         public MainWindowVM()
         {
+            TourVM = new TourViewVM();
+            CurrentView = TourVM;
 
             this.tourFactory = TourFactory.GetInstance();
             Tours = new ObservableCollection<Tour>();
@@ -228,6 +253,8 @@ namespace TourPlanner.ViewModels
                 SelectedIndex = 0; 
                 SelectedTour = Tours[0];
             }
+
+            
 
             OpenDialogCommand = new OpenDialogCommand(this);
 
@@ -252,6 +279,8 @@ namespace TourPlanner.ViewModels
             GetSearchedToursCommand = new GetSearchedToursCommand(this);
 
             ClearSearchedToursCommand = new ClearSearchedToursCommand(this);
+
+            TourViewUpdateCommand = new TourViewUpdateCommand(this);
 
             DescriptionChecked = true;
         }

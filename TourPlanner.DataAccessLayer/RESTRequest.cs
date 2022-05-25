@@ -20,11 +20,11 @@ namespace TourPlanner.DataAccessLayer
 
         private string key = "qjBgVzUoCbh1zGNWdNnowKkanIK9cADy";
 
-        private static ILoggerWrapper logger = LoggerFactory.GetLogger();
+        //private static ILoggerWrapper logger = LoggerFactory.GetLogger();
 
         public async Task<Tour> DirectionsRequest(Tour tour)
         {
-            logger.Fatal("Map created!");
+            //logger.Fatal("Map created!");
 
             string directionsrequest = await client.GetStringAsync($"http://www.mapquestapi.com/directions/v2/route?key={key}&from={tour.From}&to={tour.To}&unit=k");
 
@@ -34,7 +34,7 @@ namespace TourPlanner.DataAccessLayer
 
             if(jsoncontent["info"]["statuscode"].ToString() != "0" || jsoncontent["route"]["distance"].ToString() == "0")
             {
-                logger.Error("HTTP Error [" + jsoncontent["info"]["statuscode"].ToString() + "] at Mapquest Request - User entered invalid location(s)");
+                //logger.Error("HTTP Error [" + jsoncontent["info"]["statuscode"].ToString() + "] at Mapquest Request - User entered invalid location(s)");
                 return null;
             }
             tour.TourDistance = jsoncontent["route"]["distance"].ToString();

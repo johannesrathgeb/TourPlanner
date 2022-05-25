@@ -2,8 +2,19 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:TourPlanner"
-             StartupUri="MainWindow.xaml">
+             xmlns:viewModel="clr-namespace:TourPlanner.ViewModels"
+             xmlns:view="clr-namespace:TourPlanner.Views"
+    StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Themes/TextBoxTheme.xaml"/>
+                <ResourceDictionary Source="Themes/RoundedButtonTheme.xaml"/>
+                <ResourceDictionary Source="Themes/ListBoxItemTheme.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <DataTemplate DataType="{x:Type viewModel:TourViewVM}">
+                <view:TourView/>
+            </DataTemplate>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>

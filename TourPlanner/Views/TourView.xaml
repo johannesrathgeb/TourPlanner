@@ -1,0 +1,187 @@
+﻿<UserControl x:Class="TourPlanner.Views.TourView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:TourPlanner.ViewModels"
+             mc:Ignorable="d" 
+             Height="600" Width="920">
+
+
+
+    <StackPanel Margin="10,0,0,0">
+        <TextBlock Text="{Binding SelectedTour.Name}"
+                   Foreground="White"
+                   FontSize="28"
+                   HorizontalAlignment="Left"
+                   Margin="0,0,0,20"/>
+        <TextBlock Text="{Binding SelectedTour.TourDescription}"
+                   Foreground="White"
+                   FontSize="18"
+                   HorizontalAlignment="Left"
+                   Margin="0,0,0,20"/>
+
+        <StackPanel Orientation="Horizontal">
+            <Border Width="400"
+                    Height="200">
+                <Border.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,2">
+                        <GradientStop Color="#5bc3ff" Offset="0.0"/>
+                        <GradientStop Color="#3aa0ff" Offset="1"/>
+                    </LinearGradientBrush>
+                </Border.Background>
+
+                <Border.Clip>
+                    <RectangleGeometry RadiusX="10"
+                                       RadiusY="10"
+                                       Rect="0,0,400,200"/>
+                </Border.Clip>
+
+                <Grid>
+                    <StackPanel>
+                        <TextBlock Text="LOGS&#x0a;"
+                                   Foreground="White"
+                                   FontSize="28"
+                                   Margin="20,10,10,0"/>
+                    </StackPanel>
+                </Grid>
+            </Border>
+
+            <Border Width="200"
+                    Height="200"
+                    Margin="45,0,0,0">
+                <Border.Clip>
+                    <RectangleGeometry RadiusX="10"
+                                       RadiusY="10"
+                                       Rect="0,0,200,200"/>
+                </Border.Clip>
+                <Border.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,2">
+                        <GradientStop Color="#ffc554" Offset="0.0"/>
+                        <GradientStop Color="#ffb73a" Offset="1"/>
+                    </LinearGradientBrush>
+                </Border.Background>
+
+
+                <Grid>
+                    <StackPanel>
+                        <TextBlock Text="MAP"
+                                   Foreground="White"
+                                   FontSize="28"
+                                   Margin="20,10,10,0"/>
+
+                    </StackPanel>
+                    <Image Source="{Binding RouteImageSource}"/>
+                </Grid>
+            </Border>
+        </StackPanel>
+
+        <StackPanel>
+            <TextBlock Text="Data"
+                   Foreground="White"
+                   FontSize="20"
+                   HorizontalAlignment="Left"
+                   Margin="0,0,0,10"/>
+            <StackPanel Orientation="Horizontal">
+                <StackPanel.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="Margin" Value="15,0,0,0"/>
+                    </Style>
+                </StackPanel.Resources>
+                <Border Width="150"
+                        Height="150"
+                        Background="#844eff"
+                        Margin="0">
+
+                    <Border.Clip>
+                        <RectangleGeometry RadiusX="10"
+                                       RadiusY="10"
+                                       Rect="0,0,150,150"/>
+                    </Border.Clip>
+
+                    <Grid>
+                        <StackPanel>
+                            <TextBlock Text="{Binding SelectedTour.From}"
+                                   Foreground="White"
+                                   FontSize="20"
+                                   Margin="10,10,10,0"
+                                    TextAlignment="Left"/>
+                            <TextBlock Text="-"
+                                   Foreground="White"
+                                   FontSize="20"
+                                   Margin="10,0,10,0"
+                                   TextAlignment="Center"/>
+                            <TextBlock Text="{Binding SelectedTour.To}"
+                                   Foreground="White"
+                                   FontSize="20"
+                                   Margin="10,0,10,0"
+                                   TextAlignment="Right"/>
+
+                        </StackPanel>
+                        <Image
+                                   Source="/Resources/Train.png" Margin="-26,48,-56,-58"
+                                   />
+                    </Grid>
+                </Border>
+
+                <Border Width="150"
+                        Height="150"
+                        Background="#4e99ff"
+                        CornerRadius="10">
+                    <Grid>
+                        <StackPanel>
+                            <TextBlock Text="{Binding SelectedTour.EstimatedTime}"
+                                       Foreground="White"
+                                       FontSize="20"
+                                       Margin="10,20,10,0"
+                                        TextAlignment="Right"/>
+                            <TextBlock Text="{Binding SelectedTour.TourDistance}"
+                                       Foreground="White"
+                                       FontSize="20"
+                                       Margin="10,40,10,0"
+                                       TextAlignment="Right"/>
+
+                        </StackPanel>
+                        <Image Source="/Resources/Clock1.png" Margin="10,10,92,92"/>
+                        <Image Source="/Resources/Distance.png" Margin="0,63,80,17"/>
+                    </Grid>
+                </Border>
+
+                <Border Width="150"
+                        Height="150"
+                        Background="#69ff4e"
+                        CornerRadius="10">
+                    <Grid>
+                        <StackPanel>
+                            <TextBlock Text="4.3/5"
+                                       Foreground="White"
+                                       FontSize="26"
+                                       Margin="10,10,10,0"
+                                        TextAlignment="Right"/>
+                        </StackPanel>
+                        <Image Source="/Resources/Children.png" Margin="-1,33,34,0"/>
+                    </Grid>
+
+                </Border>
+
+                <Border Width="150"
+                        Height="150"
+                        Background="#ffa14e"
+                        CornerRadius="10">
+                    <Grid>
+                        <StackPanel>
+                            <TextBlock Text="{Binding SelectedTour.Popularity}"
+                                       Foreground="White"
+                                       FontSize="26"
+                                       Margin="10,110,10,0"
+                                        TextAlignment="Center"/>
+                        </StackPanel>
+                        <Image Source="/Resources/Popularity.png" Margin="25,10,25,40"/>
+                    </Grid>
+
+                </Border>
+            </StackPanel>
+        </StackPanel>
+    </StackPanel>
+</UserControl>
+
