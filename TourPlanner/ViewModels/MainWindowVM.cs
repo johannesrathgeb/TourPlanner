@@ -25,7 +25,6 @@ namespace TourPlanner.ViewModels
         public ICommand GenerateSummarizePDFCommand { get; }
         public ICommand ImportToursCommand { get; }
         public ICommand ExportToursCommand { get; }
-
         public ICommand GetSearchedToursCommand { get; }
         public ICommand ClearSearchedToursCommand { get; }
 

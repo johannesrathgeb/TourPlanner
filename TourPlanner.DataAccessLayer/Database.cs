@@ -15,9 +15,7 @@ namespace TourPlanner.DataAccessLayer
 {
     public class Database
     {
-        IConfiguration config = new ConfigurationBuilder()
-            .AddJsonFile(Path.GetFullPath("../../../../config/appsettings.json"), false, true)
-            .Build();
+        IConfiguration config = Configuration.GetInstance(); 
 
         string connectionstring;
         private NpgsqlConnection connection;
@@ -40,12 +38,11 @@ namespace TourPlanner.DataAccessLayer
             try
             {
             connection.Open();
-            } catch (System.Net.Sockets.SocketException ex)
+            } catch (Npgsql.NpgsqlException ex)
             {
-                MessageBox.Show(ex.Message, "Invalid Database credentials", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(ex.Message + " - Enter the correct credentials in the config file and make sure start the DB service!", "Database connection failed", MessageBoxButton.OK, MessageBoxImage.Error);
+                Environment.Exit(0);
             }
-
-
             return connection;
         }
 
@@ -266,7 +263,7 @@ namespace TourPlanner.DataAccessLayer
         public List<Tour> SearchText(string itemName)
         {
             connect();
-            using (var cmd = new NpgsqlCommand("SELECT DISTINCT tour.* FROM tour LEFT JOIN tourlog ON (tour.id = tourlog.logid) WHERE LOWER(name) LIKE @itemname OR LOWER(tourdescription) LIKE @itemname OR LOWER(tourfrom) LIKE @itemname OR LOWER(tourto) LIKE @itemname OR LOWER(tourlog.comment) LIKE @itemname", connection))
+            using (var cmd = new NpgsqlCommand("SELECT DISTINCT tour.* FROM tour LEFT JOIN tourlog ON (tour.id = tourlog.tourid) WHERE LOWER(name) LIKE @itemname OR LOWER(tourdescription) LIKE @itemname OR LOWER(tourfrom) LIKE @itemname OR LOWER(tourto) LIKE @itemname OR LOWER(tourlog.comment) LIKE @itemname", connection))
             {
                 cmd.Parameters.AddWithValue("itemname", "%" + itemName + "%");
                 NpgsqlDataReader reader = cmd.ExecuteReader();
