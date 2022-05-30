@@ -28,7 +28,27 @@ namespace TourPlanner.ViewModels
         public ICommand GetSearchedToursCommand { get; }
         public ICommand ClearSearchedToursCommand { get; }
 
+        public ICommand TourViewUpdateCommand { get; }
+
+        public ICommand SelectEnglishCommand { get; }
+        public ICommand SelectGermanCommand { get; }
+        public ICommand SelectAustrianCommand { get; }
+
         public byte[]? RouteImageSource { get; set; }
+
+
+        public TourViewVM TourVM { get; set; }
+        private object _currentView;
+
+        public object CurrentView
+        {
+            get { return _currentView; }
+            set
+            {
+                _currentView = value;
+                RaisePropertyChangedEvent();
+            }
+        }
 
         private string? filepath;
         public string? Filepath
@@ -153,6 +173,8 @@ namespace TourPlanner.ViewModels
                             RouteImageSource = ReadFully(stream);
                         }
                         RaisePropertyChangedEvent(nameof(RouteImageSource));
+                        
+
                     }
                     else
                     {
@@ -187,6 +209,11 @@ namespace TourPlanner.ViewModels
                 if (selectedTour != value)
                 {
                     selectedTour = value;
+                    if(selectedTour != null)
+                    {
+                        TourVM.updateSelectedTour(selectedTour);
+                    }
+                    
                     RaisePropertyChangedEvent();
                 }
             }
@@ -208,6 +235,8 @@ namespace TourPlanner.ViewModels
 
         public MainWindowVM()
         {
+            TourVM = new TourViewVM();
+            CurrentView = TourVM;
 
             this.tourFactory = TourFactory.GetInstance();
             Tours = new ObservableCollection<Tour>();
@@ -227,17 +256,17 @@ namespace TourPlanner.ViewModels
                 SelectedTour = Tours[0];
             }
 
-            OpenDialogCommand = new OpenDialogCommand(this);
+            
 
-            OpenLogsDialogCommand = new OpenLogsDialogCommand(this); 
+            OpenDialogCommand = new OpenDialogCommand(this);
 
             DeleteTourCommand = new DeleteTourCommand(this);
 
-            DeleteLogCommand = new DeleteLogCommand(this); 
+            //DeleteLogCommand = new DeleteLogCommand(this); 
 
             OpenEditDialogCommand = new OpenEditDialogCommand(this);
 
-            OpenEditLogsDialogCommand = new OpenEditLogsDialogCommand(this);
+            //OpenEditLogsDialogCommand = new OpenEditLogsDialogCommand(this);
 
             GenerateTourPDFCommand = new GeneratePDFCommand(Tours, 0, this);
 
@@ -251,7 +280,17 @@ namespace TourPlanner.ViewModels
 
             ClearSearchedToursCommand = new ClearSearchedToursCommand(this);
 
+            TourViewUpdateCommand = new TourViewUpdateCommand(this);
+
+            SelectEnglishCommand = new SelectLanguageCommand(this, "en");
+
+            SelectGermanCommand = new SelectLanguageCommand(this, "de");
+            SelectAustrianCommand = new SelectLanguageCommand(this, "at");
+
             DescriptionChecked = true;
+
+            SelectEnglishCommand.Execute(this);
+
         }
         public void AddTour(Tour tour)
         {

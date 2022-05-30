@@ -20,7 +20,7 @@ namespace TourPlanner.ViewModels
         public string NewLogTotaltime { get; set; } = String.Empty;
         public int NewLogRating { get; set; }
 
-        public LogsCreationDialogVM(MainWindowVM viewmodel, TourPlanner.LogsCreationDialog logscreationdialog, int mode)
+        public LogsCreationDialogVM(TourViewVM viewmodel, TourPlanner.LogsCreationDialog logscreationdialog, int mode)
         {
             Mode = mode; 
             SubmitLog = new SubmitLogCommand(viewmodel, this, logscreationdialog, Mode);

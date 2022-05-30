@@ -8,6 +8,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resources\Bus.png" />
+    <None Remove="Resources\Car.png" />
+    <None Remove="Resources\Children.png" />
+    <None Remove="Resources\Clock1.png" />
+    <None Remove="Resources\Distance.png" />
+    <None Remove="Resources\img10.png" />
+    <None Remove="Resources\Popularity.png" />
+    <None Remove="Resources\Train.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="log4net" Version="2.0.14" />
     <PackageReference Include="NUnit" Version="3.13.3" />
   </ItemGroup>
@@ -16,6 +27,36 @@
     <ProjectReference Include="..\TourPlanner.BusinessLayer\TourPlanner.BusinessLayer.csproj" />
     <ProjectReference Include="..\TourPlanner.DataAccessLayer\TourPlanner.DataAccessLayer.csproj" />
     <ProjectReference Include="..\TourPlanner.Models\TourPlanner.Models.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\Bus.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Car.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Children.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Clock1.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Distance.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Popularity.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Train.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="Views\TourView.xaml">
+      <CustomToolNamespace></CustomToolNamespace>
+    </Page>
   </ItemGroup>
 
 </Project>

@@ -10,19 +10,18 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
-using TourPlanner.ViewModels;
 
-namespace TourPlanner
+namespace TourPlanner.Views
 {
     /// <summary>
-    /// Interaktionslogik für LogsCreationDialog.xaml
+    /// Interaktionslogik für Test.xaml
     /// </summary>
-    public partial class LogsCreationDialog : Window
+    public partial class Test : UserControl
     {
-        public LogsCreationDialog(TourViewVM viewmodel, int mode)
+        public Test()
         {
-            DataContext = new LogsCreationDialogVM(viewmodel, this, mode);
             InitializeComponent();
         }
     }

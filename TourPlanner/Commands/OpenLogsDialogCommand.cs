@@ -9,16 +9,16 @@ namespace TourPlanner.Commands
 {
     public class OpenLogsDialogCommand : BaseCommand
     {
-        public MainWindowVM MainWindowVM { get; }
+        public TourViewVM TourViewVM { get; }
 
-        public OpenLogsDialogCommand(MainWindowVM vm)
+        public OpenLogsDialogCommand(TourViewVM vm)
         {
-            MainWindowVM = vm;
+            TourViewVM = vm;
         }
 
         public override bool CanExecute(object? parameter)
         {
-            if (MainWindowVM.SelectedTour != null && base.CanExecute(parameter))
+            if (TourViewVM.SelectedTour != null && base.CanExecute(parameter))
             {
                 return true;
             }
@@ -26,7 +26,7 @@ namespace TourPlanner.Commands
         }
         public override void Execute(object? parameter)
         {
-            LogsCreationDialog cd = new LogsCreationDialog(MainWindowVM, 0);
+            LogsCreationDialog cd = new LogsCreationDialog(TourViewVM, 0);
             cd.Show();
         }
 

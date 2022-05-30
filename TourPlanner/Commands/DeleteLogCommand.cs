@@ -11,15 +11,15 @@ namespace TourPlanner.Commands
     internal class DeleteLogCommand : BaseCommand
     {
 
-        public MainWindowVM MainWindowVM { get; set; }
+        public TourViewVM TourViewVM { get; set; }
 
-        public DeleteLogCommand(MainWindowVM mainwindowvm)
+        public DeleteLogCommand(TourViewVM tourwindowvm)
         {
-            MainWindowVM = mainwindowvm;
+            TourViewVM = tourwindowvm;
         }
         public override bool CanExecute(object? parameter)
         {
-            if (MainWindowVM.SelectedTour != null && MainWindowVM.SelectedLogIndex != -1 && base.CanExecute(parameter))
+            if (TourViewVM.SelectedTour != null && TourViewVM.SelectedLogIndex != -1 && base.CanExecute(parameter))
             {
                 return true;
             }
@@ -30,11 +30,12 @@ namespace TourPlanner.Commands
         {
             CalcComputedAttributes cc = new CalcComputedAttributes();
 
-            TourFactory.GetInstance().DeleteTourlogFromDB(MainWindowVM.SelectedTour.Tourlogs[MainWindowVM.SelectedLogIndex].Id);
-            MainWindowVM.DeleteTourlog(MainWindowVM.SelectedIndex, MainWindowVM.SelectedLogIndex);
+            TourFactory.GetInstance().DeleteTourlogFromDB(TourViewVM.SelectedTour.Tourlogs[TourViewVM.SelectedLogIndex].Id);
+            TourViewVM.DeleteTourlog(TourViewVM.SelectedIndex, TourViewVM.SelectedLogIndex);
 
-            MainWindowVM.SelectedTour.Popularity = cc.CalcPopularity(MainWindowVM.SelectedTour);
-            MainWindowVM.SelectedTour.ChildFriendliness = cc.CalcChildFriendliness(MainWindowVM.SelectedTour);
+            TourViewVM.SelectedTour.Popularity = cc.CalcPopularity(TourViewVM.SelectedTour);
+            TourViewVM.SelectedTour.ChildFriendliness = cc.CalcChildFriendliness(TourViewVM.SelectedTour);
+            
         }
     }
 }
