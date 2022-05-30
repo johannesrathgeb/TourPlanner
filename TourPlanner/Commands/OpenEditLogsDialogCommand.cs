@@ -30,7 +30,7 @@ namespace TourPlanner.Commands
         public override void Execute(object? parameter)
         {
             LogsCreationDialog cd = new LogsCreationDialog(TourViewVM, 1);
-            cd.Show();
+            cd.ShowDialog();
         }
 
     }

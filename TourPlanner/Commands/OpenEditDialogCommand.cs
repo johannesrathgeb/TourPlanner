@@ -29,7 +29,7 @@ namespace TourPlanner.Commands
         public override void Execute(object? parameter)
         {
             CreationDialogue cd = new CreationDialogue(MainWindowVM, 1);
-            cd.Show();
+            cd.ShowDialog();
         }
 
     }

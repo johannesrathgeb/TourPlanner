@@ -98,7 +98,7 @@
 
         <ComboBox SelectedIndex="{Binding NewTourTransportType}" Grid.Row="4" Grid.Column="1"
                   Grid.ColumnSpan="2">
-            <ComboBoxItem Content="{DynamicResource StrCar}"/>
+            <ComboBoxItem IsSelected="True" Content="{DynamicResource StrCar}"/>
             <ComboBoxItem Content="{DynamicResource StrTrain}"/>
             <ComboBoxItem Content="{DynamicResource StrBus}"/>
         </ComboBox>

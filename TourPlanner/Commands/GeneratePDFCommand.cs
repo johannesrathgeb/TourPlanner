@@ -8,6 +8,7 @@ using System.Windows;
 using System.Collections.ObjectModel;
 using TourPlanner.Models;
 using TourPlanner.ViewModels;
+using TourPlanner.Logging;
 
 namespace TourPlanner.Commands
 {
@@ -34,6 +35,7 @@ namespace TourPlanner.Commands
                 if(MainWindowVM.SelectedTour == null)
                 {
                     MessageBox.Show("Select a Tour first!", "No tour selected", MessageBoxButton.OK, MessageBoxImage.Error);
+                    LoggerFactory.GetLogger().Warn("Error while creating tour report - User didn't select a tour");
                 } else
                 {
                     report.TourReport(MainWindowVM.SelectedTour);

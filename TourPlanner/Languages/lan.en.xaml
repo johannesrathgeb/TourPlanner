@@ -7,8 +7,8 @@
     <system:String x:Key="StrEdit">Edit</system:String>
     <system:String x:Key="StrImport">Import Tours</system:String>
     <system:String x:Key="StrExport">Export Tours</system:String>
-    <system:String x:Key="StrTourPDF">Tour PDF</system:String>
-    <system:String x:Key="StrLogPDF">Log PDF</system:String>
+    <system:String x:Key="StrTourPDF">Tour Report</system:String>
+    <system:String x:Key="StrLogPDF">Summarized Report</system:String>
     <system:String x:Key="StrDate">Date</system:String>
     <system:String x:Key="StrComment">Comment</system:String>
     <system:String x:Key="StrDifficulty">Difficulty</system:String>

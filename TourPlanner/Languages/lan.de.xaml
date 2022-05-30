@@ -7,8 +7,8 @@
     <system:String x:Key="StrEdit">Bearbeiten</system:String>
     <system:String x:Key="StrImport">Touren importieren</system:String>
     <system:String x:Key="StrExport">Touren exportieren</system:String>
-    <system:String x:Key="StrTourPDF">Tour PDF</system:String>
-    <system:String x:Key="StrLogPDF">Log PDF</system:String>
+    <system:String x:Key="StrTourPDF">Tourbericht</system:String>
+    <system:String x:Key="StrLogPDF">Gesamtbericht</system:String>
     <system:String x:Key="StrDate">Datum</system:String>
     <system:String x:Key="StrComment">Kommentar</system:String>
     <system:String x:Key="StrDifficulty">Schwierigkeit</system:String>
