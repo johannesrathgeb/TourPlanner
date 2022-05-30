@@ -9,12 +9,17 @@
         WindowStartupLocation="CenterOwner"
         FocusManager.FocusedElement="{Binding ElementName=txtName}"
         mc:Ignorable="d"
-        Title="Enter your Tour credentials" Height="450" Width="800">
+        Title="Enter your Tour credentials" 
+        MinHeight="250" 
+        MinWidth="500"
+        Height="400"
+        Width="800">
 
-    <Grid>
+    <Grid Background="#272537">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition />
-            <ColumnDefinition />
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="2*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition />
@@ -25,22 +30,100 @@
             <RowDefinition />
         </Grid.RowDefinitions>
 
-        <Label Grid.Row="0" Grid.Column="0">Tourname:*</Label>
-        <Label Grid.Row="1" Grid.Column="0">Tour Description:*</Label>
-        <Label Grid.Row="2" Grid.Column="0">From:*</Label>
-        <Label Grid.Row="3" Grid.Column="0">To:*</Label>
-        <Label Grid.Row="4" Grid.Column="0">Transport Type:*</Label>
+        <TextBlock Grid.Row="0"
+                   Grid.Column="0"
+                   Text="{DynamicResource StrTourname}"
+                   Foreground="White"
+                   FontSize="16"
+                   VerticalAlignment="Center"
+                   HorizontalAlignment="Center"/>
 
-        <TextBox Text="{Binding NewTourName}" Name="txtName" Grid.Row="0" Grid.Column="1"/>
-        <TextBox Text="{Binding NewTourDescription}" Grid.Row="1" Grid.Column="1"/>
-        <TextBox Text="{Binding NewTourFrom}" Grid.Row="2" Grid.Column="1"/>
-        <TextBox Text="{Binding NewTourTo}" Grid.Row="3" Grid.Column="1"/>
-        <ComboBox SelectedIndex="{Binding NewTourTransportType}" Grid.Row="4" Grid.Column="1">
-            <ComboBoxItem>Car</ComboBoxItem>
-            <ComboBoxItem>Train</ComboBoxItem>
-            <ComboBoxItem>Bus</ComboBoxItem>
+        <TextBlock Grid.Row="1"
+                   Grid.Column="0"
+                   Text="{DynamicResource StrDescription}"
+                   Foreground="White"
+                   FontSize="16"
+                   VerticalAlignment="Center"
+                   HorizontalAlignment="Center"/>
+
+        <TextBlock Grid.Row="2"
+                   Grid.Column="0"
+                   Text="{DynamicResource StrFrom}"
+                   Foreground="White"
+                   FontSize="16"
+                   VerticalAlignment="Center"
+                   HorizontalAlignment="Center"/>
+
+        <TextBlock Grid.Row="3"
+                   Grid.Column="0"
+                   Text="{DynamicResource StrTo}"
+                   Foreground="White"
+                   FontSize="16"
+                   VerticalAlignment="Center"
+                   HorizontalAlignment="Center"/>
+
+        <TextBlock Grid.Row="4"
+                   Grid.Column="0"
+                   Text="{DynamicResource StrTransport}"
+                   Foreground="White"
+                   FontSize="16"
+                   VerticalAlignment="Center"
+                   HorizontalAlignment="Center"/>
+
+
+        <TextBox Text="{Binding NewTourName}" Grid.Row="0" Grid.Column="1"
+                 Background="#38354f"
+                 Foreground="White"
+                 Margin="10"
+                 Grid.ColumnSpan="2"
+                 Name="txtName"/>
+
+        <TextBox Text="{Binding NewTourDescription}" Grid.Row="1" Grid.Column="1"
+                 Background="#38354f"
+                 Foreground="White"
+                 Margin="10"
+                 Grid.ColumnSpan="2"/>
+
+        <TextBox Text="{Binding NewTourFrom}" Grid.Row="2" Grid.Column="1"
+                 Background="#38354f"
+                 Foreground="White"
+                 Margin="10"
+                 Grid.ColumnSpan="2"/>
+
+        <TextBox Text="{Binding NewTourTo}" Grid.Row="3" Grid.Column="1"
+                 Background="#38354f"
+                 Foreground="White"
+                 Margin="10"
+                 Grid.ColumnSpan="2"/>
+
+        <ComboBox SelectedIndex="{Binding NewTourTransportType}" Grid.Row="4" Grid.Column="1"
+                  Grid.ColumnSpan="2">
+            <ComboBoxItem Content="{DynamicResource StrCar}"/>
+            <ComboBoxItem Content="{DynamicResource StrTrain}"/>
+            <ComboBoxItem Content="{DynamicResource StrBus}"/>
         </ComboBox>
-        <Button x:Name="SubmitTourButton" IsDefault="True" Grid.Row="5" Grid.Column="0" Content="OK" Background="DarkGray" Foreground="White" Command="{Binding SubmitTour}"/>
-        <Button Name="cancelButton" IsCancel="True" Grid.Row="5" Grid.Column="1" Command="{Binding CancelTour}">Cancel</Button>
+
+
+        <Button x:Name="SubmitTourButton" 
+                IsDefault="True"
+                Margin="10"
+                Grid.Row="5" 
+                Grid.Column="0" 
+                Content="{DynamicResource StrSubmit}"
+                Background="#38354f"
+                Foreground="White" 
+                Command="{Binding SubmitTour}"
+                Style="{StaticResource RoundedButtonStyle}"
+                Grid.ColumnSpan="2"/>
+        <Button Name="cancelButton" 
+                Margin="10"
+                Content="{DynamicResource StrCancel}"
+                Background="#38354f"
+                Foreground="White"
+                IsCancel="True" 
+                Grid.Row="7" 
+                Grid.Column="2" 
+                Command="{Binding CancelTour}"
+                Style="{StaticResource RoundedButtonStyle}"/>
     </Grid>
 </Window>

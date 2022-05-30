@@ -31,6 +31,10 @@ namespace TourPlanner.ViewModels
 
         public ICommand TourViewUpdateCommand { get; }
 
+        public ICommand SelectEnglishCommand { get; }
+        public ICommand SelectGermanCommand { get; }
+        public ICommand SelectAustrianCommand { get; }
+
         public byte[]? RouteImageSource { get; set; }
 
 
@@ -258,15 +262,13 @@ namespace TourPlanner.ViewModels
 
             OpenDialogCommand = new OpenDialogCommand(this);
 
-            OpenLogsDialogCommand = new OpenLogsDialogCommand(this); 
-
             DeleteTourCommand = new DeleteTourCommand(this);
 
-            DeleteLogCommand = new DeleteLogCommand(this); 
+            //DeleteLogCommand = new DeleteLogCommand(this); 
 
             OpenEditDialogCommand = new OpenEditDialogCommand(this);
 
-            OpenEditLogsDialogCommand = new OpenEditLogsDialogCommand(this);
+            //OpenEditLogsDialogCommand = new OpenEditLogsDialogCommand(this);
 
             GenerateTourPDFCommand = new GeneratePDFCommand(Tours, 0, this);
 
@@ -282,7 +284,15 @@ namespace TourPlanner.ViewModels
 
             TourViewUpdateCommand = new TourViewUpdateCommand(this);
 
+            SelectEnglishCommand = new SelectLanguageCommand(this, "en");
+
+            SelectGermanCommand = new SelectLanguageCommand(this, "de");
+            SelectAustrianCommand = new SelectLanguageCommand(this, "at");
+
             DescriptionChecked = true;
+
+            SelectEnglishCommand.Execute(this);
+
         }
         public void AddTour(Tour tour)
         {

@@ -4,184 +4,272 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:TourPlanner.ViewModels"
-             mc:Ignorable="d" 
-             Height="600" Width="920">
+             mc:Ignorable="d"
+             VerticalContentAlignment="Stretch" 
+             HorizontalContentAlignment="Stretch">
 
 
 
-    <StackPanel Margin="10,0,0,0">
+    <Grid Margin="10,0,0,0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="200*"/>
+            <RowDefinition Height="35"/>
+            <RowDefinition Height="200*"/>
+        </Grid.RowDefinitions>
+
         <TextBlock Text="{Binding SelectedTour.Name}"
+                   Grid.Row="0"
                    Foreground="White"
                    FontSize="28"
                    HorizontalAlignment="Left"
                    Margin="0,0,0,20"/>
+        
+        <!--Description-->
         <TextBlock Text="{Binding SelectedTour.TourDescription}"
+                   Grid.Row="1"
                    Foreground="White"
                    FontSize="18"
                    HorizontalAlignment="Left"
                    Margin="0,0,0,20"/>
 
-        <StackPanel Orientation="Horizontal">
-            <Border Width="400"
-                    Height="200">
+        <!--Logs and Map-->
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            
+            <Border Width="Auto"
+                    Height="Auto"
+                    Grid.Column="0"
+                    Margin="20"
+                    CornerRadius="10">
                 <Border.Background>
                     <LinearGradientBrush StartPoint="0,0" EndPoint="1,2">
                         <GradientStop Color="#5bc3ff" Offset="0.0"/>
                         <GradientStop Color="#3aa0ff" Offset="1"/>
                     </LinearGradientBrush>
                 </Border.Background>
+            
+            
+            <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="4*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
 
-                <Border.Clip>
-                    <RectangleGeometry RadiusX="10"
-                                       RadiusY="10"
-                                       Rect="0,0,400,200"/>
-                </Border.Clip>
+                    <DataGrid SelectedIndex="{Binding SelectedLogIndex}"
+                                Style="{DynamicResource LogDataGridStyle}"
+                                Margin="20"  
+                                ItemsSource="{Binding SelectedTour.Tourlogs, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                AutoGenerateColumns="True" 
+                                IsReadOnly="True"
+                              FontSize="16">
+                        
+                        
+                        
+                    </DataGrid>
+                    
 
-                <Grid>
-                    <StackPanel>
-                        <TextBlock Text="LOGS&#x0a;"
-                                   Foreground="White"
-                                   FontSize="28"
-                                   Margin="20,10,10,0"/>
+                    <StackPanel Orientation="Horizontal" Grid.Row="1" Height="50" HorizontalAlignment="Right">
+                        <Button Content="{DynamicResource StrAdd}"
+                        Background="#38354f"
+                        Foreground="White"
+                        FontSize="12"
+                        Style="{StaticResource RoundedButtonStyle}"
+                        Width="75"
+                        Margin="10,0,0,10"
+                        Padding="5"
+                        Command="{Binding OpenLogsDialogCommand}"/>
+                        <Button Content="{DynamicResource StrDelete}"
+                        Background="#38354f"
+                        Foreground="White"
+                        FontSize="12"
+                        Style="{StaticResource RoundedButtonStyle}"
+                        Width="75"
+                        Margin="10,0,10,10"
+                        Padding="5"
+                        Command="{Binding DeleteLogCommand}"/>
+                        <Button Content="{DynamicResource StrEdit}"
+                        Background="#38354f"
+                        Foreground="White"
+                        FontSize="12"
+                        Style="{StaticResource RoundedButtonStyle}"
+                        Width="75"
+                        Margin="0,0,10,10"
+                        Padding="5"
+                        Command="{Binding OpenEditLogsDialogCommand}"/>
                     </StackPanel>
                 </Grid>
             </Border>
 
-            <Border Width="200"
-                    Height="200"
-                    Margin="45,0,0,0">
-                <Border.Clip>
-                    <RectangleGeometry RadiusX="10"
-                                       RadiusY="10"
-                                       Rect="0,0,200,200"/>
-                </Border.Clip>
+            <Border 
+                    Width="Auto"
+                    Height="Auto"
+                    Margin="40,20,20,20"
+                    Grid.Column="1"
+                CornerRadius="10">
                 <Border.Background>
-                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,2">
-                        <GradientStop Color="#ffc554" Offset="0.0"/>
-                        <GradientStop Color="#ffb73a" Offset="1"/>
-                    </LinearGradientBrush>
+                    <ImageBrush ImageSource="{Binding RouteImageSource}" Stretch="UniformToFill"/>
                 </Border.Background>
-
-
-                <Grid>
-                    <StackPanel>
-                        <TextBlock Text="MAP"
-                                   Foreground="White"
-                                   FontSize="28"
-                                   Margin="20,10,10,0"/>
-
-                    </StackPanel>
-                    <Image Source="{Binding RouteImageSource}"/>
-                </Grid>
             </Border>
-        </StackPanel>
 
-        <StackPanel>
-            <TextBlock Text="Data"
+        </Grid>
+
+        
+        <TextBlock Grid.Row="3"
+                   Text="{DynamicResource StrData}"
                    Foreground="White"
                    FontSize="20"
                    HorizontalAlignment="Left"
                    Margin="0,0,0,10"/>
-            <StackPanel Orientation="Horizontal">
-                <StackPanel.Resources>
-                    <Style TargetType="{x:Type Border}">
-                        <Setter Property="Margin" Value="15,0,0,0"/>
-                    </Style>
-                </StackPanel.Resources>
-                <Border Width="150"
-                        Height="150"
-                        Background="#844eff"
-                        Margin="0">
 
-                    <Border.Clip>
-                        <RectangleGeometry RadiusX="10"
-                                       RadiusY="10"
-                                       Rect="0,0,150,150"/>
-                    </Border.Clip>
+        <!--Data-->
+        <Grid Grid.Row="4">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+                       
+            <Border Grid.Column="0"
+                    Width="Auto"
+                    Height="Auto"
+                    Background="#844eff"
+                    Margin="20"
+                    CornerRadius="10">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="3*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="2*"/>
+                    </Grid.ColumnDefinitions>
 
-                    <Grid>
-                        <StackPanel>
-                            <TextBlock Text="{Binding SelectedTour.From}"
-                                   Foreground="White"
-                                   FontSize="20"
-                                   Margin="10,10,10,0"
-                                    TextAlignment="Left"/>
-                            <TextBlock Text="-"
-                                   Foreground="White"
-                                   FontSize="20"
-                                   Margin="10,0,10,0"
-                                   TextAlignment="Center"/>
-                            <TextBlock Text="{Binding SelectedTour.To}"
-                                   Foreground="White"
-                                   FontSize="20"
-                                   Margin="10,0,10,0"
-                                   TextAlignment="Right"/>
+                    <Viewbox Grid.Row="0" Grid.Column="0">
+                        <TextBlock Text="{Binding SelectedTour.From}"
+                                Foreground="White"
+                                FontSize="20"
+                                TextAlignment="Left"/>
+                    </Viewbox>
 
-                        </StackPanel>
-                        <Image
-                                   Source="/Resources/Train.png" Margin="-26,48,-56,-58"
-                                   />
-                    </Grid>
-                </Border>
+                    <Viewbox Grid.Row="1" Grid.Column="1">
+                        <TextBlock Text="-"
+                                Foreground="White"
+                                FontSize="20"
+                                TextAlignment="Center"/>
+                    </Viewbox>
 
-                <Border Width="150"
-                        Height="150"
-                        Background="#4e99ff"
-                        CornerRadius="10">
-                    <Grid>
-                        <StackPanel>
-                            <TextBlock Text="{Binding SelectedTour.EstimatedTime}"
-                                       Foreground="White"
-                                       FontSize="20"
-                                       Margin="10,20,10,0"
-                                        TextAlignment="Right"/>
-                            <TextBlock Text="{Binding SelectedTour.TourDistance}"
-                                       Foreground="White"
-                                       FontSize="20"
-                                       Margin="10,40,10,0"
-                                       TextAlignment="Right"/>
+                    <Viewbox Grid.Row="2" Grid.Column="2">
+                        <TextBlock Text="{Binding SelectedTour.To}"
+                                Foreground="White"
+                                FontSize="20"
+                                TextAlignment="Right"/>
+                    </Viewbox>
 
-                        </StackPanel>
-                        <Image Source="/Resources/Clock1.png" Margin="10,10,92,92"/>
-                        <Image Source="/Resources/Distance.png" Margin="0,63,80,17"/>
-                    </Grid>
-                </Border>
+                    <Image Source="{Binding TransportTypeImage}" 
+                            Grid.Row="4"
+                           Grid.Column="0"
+                           Grid.ColumnSpan="3"
+                           VerticalAlignment="Bottom"
+                            HorizontalAlignment="Right"/>
+                </Grid>
+            </Border>
 
-                <Border Width="150"
-                        Height="150"
-                        Background="#69ff4e"
-                        CornerRadius="10">
-                    <Grid>
-                        <StackPanel>
-                            <TextBlock Text="4.3/5"
-                                       Foreground="White"
-                                       FontSize="26"
-                                       Margin="10,10,10,0"
-                                        TextAlignment="Right"/>
-                        </StackPanel>
-                        <Image Source="/Resources/Children.png" Margin="-1,33,34,0"/>
-                    </Grid>
+            <Border Grid.Column="1"
+                    Width="Auto"
+                    Height="Auto"
+                    Background="#4e99ff"
+                    Margin="20"
+                    CornerRadius="10">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
 
-                </Border>
+                    <Image Source="/Resources/Clock1.png"
+                           Grid.Row="0"
+                           Grid.Column="0"/>
+                    <Image Source="/Resources/Distance.png"
+                           Grid.Row="1"
+                           Grid.Column="0"/>
 
-                <Border Width="150"
-                        Height="150"
-                        Background="#ffa14e"
-                        CornerRadius="10">
-                    <Grid>
-                        <StackPanel>
-                            <TextBlock Text="{Binding SelectedTour.Popularity}"
-                                       Foreground="White"
-                                       FontSize="26"
-                                       Margin="10,110,10,0"
-                                        TextAlignment="Center"/>
-                        </StackPanel>
-                        <Image Source="/Resources/Popularity.png" Margin="25,10,25,40"/>
-                    </Grid>
+                    <Viewbox Grid.Row="0"
+                             Grid.Column="1">
+                        <TextBlock Text="{Binding SelectedTour.EstimatedTime}"
+                                    Foreground="White"
+                                    FontSize="20"
+                                    
+                                    TextAlignment="Right"/>
+                    </Viewbox>
 
-                </Border>
-            </StackPanel>
-        </StackPanel>
-    </StackPanel>
+                    <Viewbox Grid.Row="1"
+                             Grid.Column="1">
+                        <TextBlock Text="{Binding SelectedTour.TourDistance}"
+                                    Foreground="White"
+                                    FontSize="20"
+                                    
+                                    TextAlignment="Right"/>
+                    </Viewbox>
+                </Grid>
+            </Border>
+
+            <Border Grid.Column="2"
+                    Width="Auto"
+                    Height="Auto"
+                    Background="#69ff4e"
+                    Margin="20"
+                    CornerRadius="10">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Image Source="/Resources/Children.png" Grid.Column="0"/>
+                    <Viewbox Grid.Column="1">
+                        <TextBlock Text="{Binding SelectedTour.ChildFriendliness, StringFormat={}{0}/5}"
+                                    Foreground="White"
+                                    FontSize="26"
+                                    TextAlignment="Right"/>
+                    </Viewbox>
+                </Grid>
+            </Border>
+
+            <Border Grid.Column="3"                    
+                    Background="#ffa14e"
+                    Margin="20"
+                    CornerRadius="10">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="2*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <Viewbox Grid.Row="1">
+                        <TextBlock Text="{Binding SelectedTour.Popularity, StringFormat={}{0}/5}"
+                                    Foreground="White"
+                                    TextAlignment="Center"/>
+                    </Viewbox>
+
+                    <Image Source="/Resources/Popularity.png" 
+                               Grid.Row="0"/>
+                </Grid>
+            </Border>
+        </Grid>
+    </Grid>
 </UserControl>
 

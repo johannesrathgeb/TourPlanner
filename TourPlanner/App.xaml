@@ -11,6 +11,7 @@
                 <ResourceDictionary Source="Themes/TextBoxTheme.xaml"/>
                 <ResourceDictionary Source="Themes/RoundedButtonTheme.xaml"/>
                 <ResourceDictionary Source="Themes/ListBoxItemTheme.xaml"/>
+                <ResourceDictionary Source="Themes/LogsDataGridTheme.xaml"/>
             </ResourceDictionary.MergedDictionaries>
             <DataTemplate DataType="{x:Type viewModel:TourViewVM}">
                 <view:TourView/>

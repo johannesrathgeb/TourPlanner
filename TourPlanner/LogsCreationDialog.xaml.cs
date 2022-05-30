@@ -20,7 +20,7 @@ namespace TourPlanner
     /// </summary>
     public partial class LogsCreationDialog : Window
     {
-        public LogsCreationDialog(MainWindowVM viewmodel, int mode)
+        public LogsCreationDialog(TourViewVM viewmodel, int mode)
         {
             DataContext = new LogsCreationDialogVM(viewmodel, this, mode);
             InitializeComponent();

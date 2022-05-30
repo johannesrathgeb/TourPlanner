@@ -13,14 +13,14 @@ namespace TourPlanner.Commands
 {
     public class SubmitLogCommand : BaseCommand
     {
-        public MainWindowVM MainWindowVM { get; set; }
+        public TourViewVM TourViewVM { get; set; }
         public LogsCreationDialogVM LogsCreationDialogVM { get; set; }
         public TourPlanner.LogsCreationDialog LogsCreationDialog { get; set; }
         public int Mode { get; set; }
 
-        public SubmitLogCommand(MainWindowVM mainwindowvm, LogsCreationDialogVM logscreationdialogvm, TourPlanner.LogsCreationDialog logscreationdialog, int mode)
+        public SubmitLogCommand(TourViewVM tourwindowvm, LogsCreationDialogVM logscreationdialogvm, TourPlanner.LogsCreationDialog logscreationdialog, int mode)
         {
-            MainWindowVM = mainwindowvm;
+            TourViewVM = tourwindowvm;
             LogsCreationDialogVM = logscreationdialogvm;
             LogsCreationDialog = logscreationdialog;
             Mode = mode;
@@ -49,22 +49,26 @@ namespace TourPlanner.Commands
                 MessageBox.Show("Enter a valid number in the [Total Time] field", "Not a number", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return; 
             }
-            //var dateFormats = new[] { "dd.MM.yyyy", "dd-MM-yyyy", "dd/MM/yyyy", "dd.M.yyyy", "dd-M.yyyy", "dd/M/yyyy", "d.MM.yyyy", "d-MM-yyyy", "d/MM/YYYY", "d.M.yyyy", "d-M-yyyy", "d/M/yyyy" };
-            if (!DateTime.TryParseExact(LogsCreationDialogVM.NewLogDate,"dd.MM.yyyy", DateTimeFormatInfo.InvariantInfo, DateTimeStyles.None, out s))
+
+            string logDate = LogsCreationDialogVM.NewLogDate;
+            string[] textSplit = logDate.Split(" ");
+            logDate = textSplit[0];
+            var dateFormats = new[] { "dd/MM/yyyy", "d/MM/yyyy", "dd/M/yyyy", "d/M/yyyy"};
+            if (!DateTime.TryParseExact(logDate, dateFormats, DateTimeFormatInfo.InvariantInfo, DateTimeStyles.None, out s))
             {
-                MessageBox.Show("Please enter a valid date! [dd.MM.yyyy]", "Invalid Date Format", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show("Please enter a valid date! [dd/MM/yyyy]", "Invalid Date Format", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
 
             if (Mode == 0)
             {
-                tourlog = TourFactory.GetInstance().AddTourlogToDB(MainWindowVM.SelectedTour.Id, LogsCreationDialogVM.NewLogDate, LogsCreationDialogVM.NewLogComment, LogsCreationDialogVM.NewLogDifficulty + 1, LogsCreationDialogVM.NewLogTotaltime, LogsCreationDialogVM.NewLogRating + 1);
-                MainWindowVM.SelectedTour.Tourlogs.Add(tourlog);
+                tourlog = TourFactory.GetInstance().AddTourlogToDB(TourViewVM.SelectedTour.Id, logDate, LogsCreationDialogVM.NewLogComment, LogsCreationDialogVM.NewLogDifficulty + 1, LogsCreationDialogVM.NewLogTotaltime, LogsCreationDialogVM.NewLogRating + 1);
+                TourViewVM.SelectedTour.Tourlogs.Add(tourlog);
             } else
             {
-                tourlog = new Tourlog(MainWindowVM.SelectedTour.Tourlogs[MainWindowVM.SelectedLogIndex].Id, LogsCreationDialogVM.NewLogDate, LogsCreationDialogVM.NewLogComment, LogsCreationDialogVM.NewLogDifficulty + 1, LogsCreationDialogVM.NewLogTotaltime, LogsCreationDialogVM.NewLogRating + 1);
+                tourlog = new Tourlog(TourViewVM.SelectedTour.Tourlogs[TourViewVM.SelectedLogIndex].Id, logDate, LogsCreationDialogVM.NewLogComment, LogsCreationDialogVM.NewLogDifficulty + 1, LogsCreationDialogVM.NewLogTotaltime, LogsCreationDialogVM.NewLogRating + 1);
                 tourlog = TourFactory.GetInstance().UpdateTourlogInDB(tourlog);
-                MainWindowVM.SelectedTour.Tourlogs[MainWindowVM.SelectedLogIndex] = tourlog; 
+                TourViewVM.SelectedTour.Tourlogs[TourViewVM.SelectedLogIndex] = tourlog; 
             }
 
             LogsCreationDialog.Close();

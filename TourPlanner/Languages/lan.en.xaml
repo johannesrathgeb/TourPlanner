@@ -1,0 +1,28 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:system="clr-namespace:System;assembly=netstandard">
+    <system:String x:Key="StrTitle">TourPlannerEN</system:String>
+    <system:String x:Key="StrSearch">Search</system:String>
+    <system:String x:Key="StrAdd">Add</system:String>
+    <system:String x:Key="StrDelete">Delete</system:String>
+    <system:String x:Key="StrEdit">Edit</system:String>
+    <system:String x:Key="StrImport">Import Tours</system:String>
+    <system:String x:Key="StrExport">Export Tours</system:String>
+    <system:String x:Key="StrTourPDF">Tour PDF</system:String>
+    <system:String x:Key="StrLogPDF">Log PDF</system:String>
+    <system:String x:Key="StrDate">Date</system:String>
+    <system:String x:Key="StrComment">Comment</system:String>
+    <system:String x:Key="StrDifficulty">Difficulty</system:String>
+    <system:String x:Key="StrTime">Total time (min)</system:String>
+    <system:String x:Key="StrRating">Rating</system:String>
+    <system:String x:Key="StrSubmit">Submit</system:String>
+    <system:String x:Key="StrCancel">Cancel</system:String>
+    <system:String x:Key="StrTourname">Tourname</system:String>
+    <system:String x:Key="StrDescription">Description</system:String>
+    <system:String x:Key="StrFrom">From</system:String>
+    <system:String x:Key="StrTo">To</system:String>
+    <system:String x:Key="StrTransport">Transport Type</system:String>
+    <system:String x:Key="StrCar">Car</system:String>
+    <system:String x:Key="StrTrain">Train</system:String>
+    <system:String x:Key="StrBus">Bus</system:String>
+    <system:String x:Key="StrData">Data</system:String>
+</ResourceDictionary>

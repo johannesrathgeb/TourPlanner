@@ -6,11 +6,14 @@
         xmlns:local="clr-namespace:TourPlanner.ViewModels"
         mc:Ignorable="d"
         Title="Tour Planner" 
-        Height="600" Width="920"
         WindowStyle="ThreeDBorderWindow"
         ResizeMode="CanResize"  
         Background="Transparent"
-        AllowsTransparency="False">
+        AllowsTransparency="False"
+        HorizontalContentAlignment="Stretch"
+        VerticalContentAlignment="Stretch"
+        MinHeight="720"
+        MinWidth="1280">
 
     <Window.DataContext>
         <local:MainWindowVM/>
@@ -18,30 +21,36 @@
 
     <Grid Background="#272537">
         <Grid.RowDefinitions>
-            <RowDefinition Height="75"/>
-            <RowDefinition Height="52*"/>
-            <RowDefinition Height="473*"/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="50*" MinHeight="50"/>
+            <RowDefinition Height="450*" MinHeight="50"/>
+            <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="200" />
-            <ColumnDefinition/>
+            <ColumnDefinition Width="265" />
+            <ColumnDefinition Width="10*"/>
         </Grid.ColumnDefinitions>
 
-        <TextBlock Text="TourPlanner"
+        <TextBlock Text="{DynamicResource StrTitle}"
                    VerticalAlignment="Center"
                    HorizontalAlignment="Left"
                    Foreground="White"
                    FontSize="22"
                    Margin="20,0,0,0"/>
 
+        <!--ListBox and Searchbar-->
         <StackPanel Grid.Row="1" Grid.RowSpan="2">
-            <TextBox Width="Auto"
+            <TextBox Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"
+                     Width="Auto"
                      Height="40"
                      VerticalContentAlignment="Center"
                      HorizontalAlignment="Left"
                      Margin="20,0,0,0"
-                     Style="{StaticResource ModernTextBox}"/>
+                     Style="{StaticResource ModernTextBox}">
+                <TextBox.InputBindings>
+                    <KeyBinding Command="{Binding GetSearchedToursCommand}" Key="Enter" />
+                </TextBox.InputBindings>
+            </TextBox>
 
             <ListBox Background="#272537" BorderThickness="0" SelectedIndex="{Binding SelectedIndex}" ItemsSource="{Binding Tours, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
 
@@ -58,79 +67,112 @@
             </ListBox>
         </StackPanel>
 
+        
+        <!--Left Bottom Buttons-->
         <StackPanel Orientation="Horizontal" Grid.Row="3" Height="50">
-            <Button Content="Add"
+            <Button Content="{DynamicResource StrAdd}"
                         Background="#38354f"
                         Foreground="White"
-                        FontSize="16"
+                        FontSize="12"
                         Style="{StaticResource RoundedButtonStyle}"
-                        Width="50"
+                        Width="75"
                         Margin="10,0,0,10"
-                        Padding="10"
+                        Padding="5"
                         Command="{Binding OpenDialogCommand}"/>
-            <Button Content="Delete"
+            <Button Content="{DynamicResource StrDelete}"
                         Background="#38354f"
                         Foreground="White"
-                        FontSize="16"
+                        FontSize="12"
                         Style="{StaticResource RoundedButtonStyle}"
-                        Width="50"
+                        Width="75"
                         Margin="10,0,10,10"
-                        Padding="10"
+                        Padding="5"
                         Command="{Binding DeleteTourCommand}"/>
-            <Button Content="Edit"
+            <Button Content="{DynamicResource StrEdit}"
                         Background="#38354f"
                         Foreground="White"
-                        FontSize="16"
+                        FontSize="12"
                         Style="{StaticResource RoundedButtonStyle}"
-                        Width="50"
+                        Width="75"
                         Margin="0,0,10,10"
-                        Padding="10"
+                        Padding="5"
                         Command="{Binding OpenEditDialogCommand}"/>
         </StackPanel>
 
-        <StackPanel Orientation="Horizontal" Grid.Column="1">
-            <Button Style="{StaticResource RoundedButtonStyle}"         Content="Import Tours"
+        <!--Top Menu-->
+        <Grid Grid.Column="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            
+
+            <Button Style="{StaticResource RoundedButtonStyle}"         Content="{DynamicResource StrImport}"
+                        Grid.Column="0"
                         Background="#38354f"
                         Foreground="White"
                         BorderThickness="0"
                         FontSize="18"
                         Margin="10"
-                        Padding="10"
+                        Padding="5"
                         Command="{Binding ImportToursCommand}"/>
-            <Button Style="{StaticResource RoundedButtonStyle}"         Content="Export Tours"
+            <Button Style="{StaticResource RoundedButtonStyle}"         Content="{DynamicResource StrExport}"
+                        Grid.Column="1"
                         Background="#38354f"
                         Foreground="White"
                         BorderThickness="0"
                         FontSize="18"
                         Margin="10"
-                        Padding="10"
+                        Padding="5"
                         Command="{Binding ExportToursCommand}"/>
-            <Button Style="{StaticResource RoundedButtonStyle}"         Content="Tour PDF"
+            <Button Style="{StaticResource RoundedButtonStyle}"         Content="{DynamicResource StrTourPDF}"
+                        Grid.Column="2"
                         Background="#38354f"
                         Foreground="White"
                         FontSize="18"
                         Margin="10"
-                        Padding="10"
+                        Padding="5"
                         Command="{Binding GenerateTourPDFCommand}"/>
-            <Button Style="{StaticResource RoundedButtonStyle}"         Content="Summarized PDF"
+
+            <Button Style="{StaticResource RoundedButtonStyle}"         Content="{DynamicResource StrLogPDF}"
+                        Grid.Column="3"
                         Background="#38354f"
                         Foreground="White"
                         BorderThickness="0"
                         FontSize="18"
                         Margin="10"
-                        Padding="10"
+                        Padding="5"
                         Command="{Binding GenerateSummarizePDFCommand}"/>
-        </StackPanel>
+            
+                
+            <Menu Grid.Column="4"
+                  Background="#38354f"
+                  Foreground="White"
+                  FontSize="18"
+                  Margin="10"
+                    Padding="5"
+                  >
+
+                <MenuItem Header="Language" Background="#38354f" VerticalAlignment="Center" HorizontalContentAlignment="Center">
+                    <MenuItem Background="#38354f" Header="English" BorderThickness="0" Command="{Binding SelectEnglishCommand}"/>
+                    <MenuItem Background="#38354f" Header="Deutsch" BorderThickness="0" Command="{Binding SelectGermanCommand}"/>
+                    <MenuItem Background="#38354f" Header="Österreich, Österreich" BorderThickness="0" Command="{Binding SelectAustrianCommand}"/>
+                </MenuItem>
+            </Menu>
+        </Grid>
 
 
         <!--<TextBox Grid.Row="0" Grid.Column="0" Text="{Binding SearchText}" Background="DarkGray" Foreground="White"/>
             <Button Grid.Row="0" Grid.Column="1" Content="Search" Background="LightGray" Foreground="Black" Command="{Binding GetSearchedToursCommand}"/>
             <Button Grid.Row="0" Grid.Column="2" Content="Clear" Background="LightGray" Foreground="Black" Command="{Binding ClearSearchedToursCommand}"/>!-->
-        
+        <!--Tour Data-->
         <ContentControl Grid.Row="1" 
                         Grid.Column="1" 
                         Grid.RowSpan="3"
-                        Margin="10,10,10,10"
                         Content="{Binding CurrentView}"/>
         
         <!--<Grid Grid.Row="2" Grid.Column="1">

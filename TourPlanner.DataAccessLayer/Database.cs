@@ -265,7 +265,7 @@ namespace TourPlanner.DataAccessLayer
         public List<Tour> SearchText(string itemName)
         {
             connect();
-            using (var cmd = new NpgsqlCommand("SELECT DISTINCT tour.* FROM tour LEFT JOIN tourlog ON (tour.id = tourlog.logid) WHERE LOWER(name) LIKE @itemname OR LOWER(tourdescription) LIKE @itemname OR LOWER(tourfrom) LIKE @itemname OR LOWER(tourto) LIKE @itemname OR LOWER(tourlog.comment) LIKE @itemname", connection))
+            using (var cmd = new NpgsqlCommand("SELECT DISTINCT tour.* FROM tour LEFT JOIN tourlog ON (tour.id = tourlog.tourid) WHERE LOWER(name) LIKE @itemname OR LOWER(tourdescription) LIKE @itemname OR LOWER(tourfrom) LIKE @itemname OR LOWER(tourto) LIKE @itemname OR LOWER(tourlog.comment) LIKE @itemname", connection))
             {
                 cmd.Parameters.AddWithValue("itemname", "%" + itemName + "%");
                 NpgsqlDataReader reader = cmd.ExecuteReader();

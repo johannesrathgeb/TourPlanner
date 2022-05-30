@@ -1,0 +1,28 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:system="clr-namespace:System;assembly=netstandard">
+    <system:String x:Key="StrTitle">TourPlannerAT</system:String>
+    <system:String x:Key="StrSearch">Suachn</system:String>
+    <system:String x:Key="StrAdd">Haus dazua</system:String>
+    <system:String x:Key="StrDelete">Schmeiss ausse</system:String>
+    <system:String x:Key="StrEdit">Des bast ned</system:String>
+    <system:String x:Key="StrImport">Tourn impoatian</system:String>
+    <system:String x:Key="StrExport">Tourn expoatian</system:String>
+    <system:String x:Key="StrTourPDF">Tour PDF</system:String>
+    <system:String x:Key="StrLogPDF">Log PDF</system:String>
+    <system:String x:Key="StrDate">Datum</system:String>
+    <system:String x:Key="StrComment">Des sog i dazua</system:String>
+    <system:String x:Key="StrDifficulty">Zachheit</system:String>
+    <system:String x:Key="StrTime">Gonze Zeit (min)</system:String>
+    <system:String x:Key="StrRating">Bewertung</system:String>
+    <system:String x:Key="StrSubmit">Jawoi</system:String>
+    <system:String x:Key="StrCancel">Na ge</system:String>
+    <system:String x:Key="StrTourname">Tournom</system:String>
+    <system:String x:Key="StrDescription">So woas</system:String>
+    <system:String x:Key="StrFrom">Von</system:String>
+    <system:String x:Key="StrTo">Noch</system:String>
+    <system:String x:Key="StrTransport">Mit wos bin i gfoan</system:String>
+    <system:String x:Key="StrCar">Kistn</system:String>
+    <system:String x:Key="StrTrain">Tschu Tschu</system:String>
+    <system:String x:Key="StrBus">Bussal</system:String>
+    <system:String x:Key="StrData">Datn</system:String>
+</ResourceDictionary>
