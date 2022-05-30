@@ -160,8 +160,8 @@ namespace TourPlanner.ViewModels
             SelectAustrianCommand = new SelectLanguageCommand(this, "at");
 
             SelectEnglishCommand.Execute(this);
-
         }
+
         public void AddTour(Tour tour)
         {
             Tours.Add(tour);
