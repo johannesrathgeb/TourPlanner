@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TourPlanner.BusinessLayer;
+﻿using TourPlanner.BusinessLayer;
 using System.Windows;
 using System.Collections.ObjectModel;
 using TourPlanner.Models;
@@ -30,7 +25,7 @@ namespace TourPlanner.Commands
         {
             Pdfreport report = new Pdfreport();
 
-            if(Type == 0)
+            if(Type == 0) //0 for tourreport, 1 for summarized report
             {
                 if(MainWindowVM.SelectedTour == null)
                 {

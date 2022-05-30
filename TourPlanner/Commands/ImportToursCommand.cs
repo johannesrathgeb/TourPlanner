@@ -1,10 +1,5 @@
 ﻿using Microsoft.Win32;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using TourPlanner.BusinessLayer;
 using TourPlanner.Models;
@@ -21,8 +16,6 @@ namespace TourPlanner.Commands
         {
             MainWindowVM = mv;
         }
-
-
         public override async void Execute(object? parameter)
         {
             OpenFileDialog ofd = new OpenFileDialog();

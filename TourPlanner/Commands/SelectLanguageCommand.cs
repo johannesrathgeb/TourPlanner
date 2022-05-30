@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using TourPlanner.ViewModels;
 
@@ -18,7 +14,6 @@ namespace TourPlanner.Commands
             Language = language;
             MainWindowVM = mainwindowvm;
         }
-
         public override void Execute(object? parameter)
         {
             ResourceDictionary dictionary = new ResourceDictionary();

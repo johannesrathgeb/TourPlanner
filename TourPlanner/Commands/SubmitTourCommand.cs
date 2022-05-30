@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TourPlanner.ViewModels;
+﻿using TourPlanner.ViewModels;
 using TourPlanner.Models;
 using TourPlanner.BusinessLayer;
 using System.Windows; 
@@ -44,7 +39,7 @@ namespace TourPlanner.Commands
             ProcessRestData prd = new ProcessRestData();
             Tour tour; 
 
-            if(Mode == 1)
+            if(Mode == 1) //0 for tour creation, 1 for tour editing
             {
                 tour = new Tour(CreationDialogVM.NewTourId, CreationDialogVM.NewTourName, CreationDialogVM.NewTourDescription, CreationDialogVM.NewTourFrom, CreationDialogVM.NewTourTo, CreationDialogVM.NewTourTransportType);
             } else
@@ -54,7 +49,7 @@ namespace TourPlanner.Commands
 
             tour = await prd.HandleMapRequest(tour, Mode);
 
-            if(tour == null)
+            if(tour == null) //check if Mapquest request was successful
             {
                 MessageBox.Show("At least one location does not exist or you entered the same location twice!","Invalid Location(s)",MessageBoxButton.OK,MessageBoxImage.Warning);
             } else

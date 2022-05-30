@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using TourPlanner.BusinessLayer;
 using TourPlanner.Models;
@@ -44,12 +40,13 @@ namespace TourPlanner.Commands
             CalcComputedAttributes cc = new CalcComputedAttributes(); 
             Tourlog tourlog; 
 
-            if (!int.TryParse(LogsCreationDialogVM.NewLogTotaltime, out _))
+            if (!int.TryParse(LogsCreationDialogVM.NewLogTotaltime, out _)) //checks for valid time
             {
                 MessageBox.Show("Enter a valid number in the [Total Time] field", "Not a number", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return; 
             }
 
+            //check for valid date format
             string logDate = LogsCreationDialogVM.NewLogDate;
             string[] textSplit = logDate.Split(" ");
             logDate = textSplit[0];
@@ -60,7 +57,7 @@ namespace TourPlanner.Commands
                 return;
             }
 
-            if (Mode == 0)
+            if (Mode == 0) // 0 for log creation, 1 for log editing
             {
                 tourlog = TourFactory.GetInstance().AddTourlogToDB(TourViewVM.SelectedTour.Id, logDate, LogsCreationDialogVM.NewLogComment, LogsCreationDialogVM.NewLogDifficulty + 1, LogsCreationDialogVM.NewLogTotaltime, LogsCreationDialogVM.NewLogRating + 1);
                 TourViewVM.SelectedTour.Tourlogs.Add(tourlog);
@@ -71,6 +68,7 @@ namespace TourPlanner.Commands
                 TourViewVM.SelectedTour.Tourlogs[TourViewVM.SelectedLogIndex] = tourlog; 
             }
 
+            //recalculates computed attributes when log gets deleted
             TourViewVM.SelectedTour.Popularity = cc.CalcPopularity(TourViewVM.SelectedTour);
             TourViewVM.SelectedTour.ChildFriendliness = cc.CalcChildFriendliness(TourViewVM.SelectedTour);
 

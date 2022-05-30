@@ -1,10 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using TourPlanner.Logging;
 
@@ -18,7 +14,6 @@ namespace TourPlanner.DataAccessLayer
         {
             if (instance == null)
             {
-
                 if(!File.Exists("../../../../config/appsettings.json"))
                 {
                     LoggerFactory.GetLogger().Fatal("Error while reading configuration file information - Configuration file is missing!");

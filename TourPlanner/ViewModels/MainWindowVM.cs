@@ -27,9 +27,7 @@ namespace TourPlanner.ViewModels
         public ICommand ExportToursCommand { get; }
         public ICommand GetSearchedToursCommand { get; }
         public ICommand ClearSearchedToursCommand { get; }
-
         public ICommand TourViewUpdateCommand { get; }
-
         public ICommand SelectEnglishCommand { get; }
         public ICommand SelectGermanCommand { get; }
         public ICommand SelectAustrianCommand { get; }
@@ -151,7 +149,6 @@ namespace TourPlanner.ViewModels
             }
         }
 
-
         private int selectedIndex = -1;
         public int SelectedIndex
         {
@@ -184,7 +181,6 @@ namespace TourPlanner.ViewModels
                 }
             }
         }
-
         public static byte[] ReadFully(Stream input)
         {
             var buffer = new byte[16 * 1024];
@@ -200,7 +196,6 @@ namespace TourPlanner.ViewModels
         }
 
         private Tour? selectedTour;
-
         public Tour? SelectedTour
         {
             get => selectedTour;
@@ -230,9 +225,6 @@ namespace TourPlanner.ViewModels
                 }
             }
         }
-
-
-
         public MainWindowVM()
         {
             TourVM = new TourViewVM();
@@ -305,7 +297,6 @@ namespace TourPlanner.ViewModels
         {
             Tours[tourindex].Tourlogs.RemoveAt(logindex);
         }
-
         public Tour ChangeTourSelection(int val)
         {
             if (val != -1)
@@ -314,6 +305,5 @@ namespace TourPlanner.ViewModels
             }
             else return null;
         }
-
     }
 }

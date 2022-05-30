@@ -1,6 +1,5 @@
 using Moq;
 using NUnit.Framework;
-using System.Collections;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using TourPlanner.BusinessLayer;
@@ -28,12 +27,6 @@ namespace TourPlannerTests
         [SetUp]
         public void Setup()
         {
-            //loglist.Add(tourlog1);
-            //loglist.Add(tourlog2);
-            //tourlist.Add(fulltour2);
-            //tourlist.Add(fulltour3);
-
-
             var mockobject = new Mock<ITourFactory>();
             mockobject
                 .Setup(mobj => mobj.AddTourToDB(tour1.Name, tour1.TourDescription, tour1.From, tour1.To, tour1.TransportType, tour1.EstimatedTime, tour1.TourDistance))

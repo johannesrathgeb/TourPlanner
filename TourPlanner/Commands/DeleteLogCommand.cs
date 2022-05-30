@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TourPlanner.BusinessLayer;
+﻿using TourPlanner.BusinessLayer;
 using TourPlanner.ViewModels;
 
 namespace TourPlanner.Commands
@@ -33,7 +28,8 @@ namespace TourPlanner.Commands
             TourFactory.GetInstance().DeleteTourlogFromDB(TourViewVM.SelectedTour.Tourlogs[TourViewVM.SelectedLogIndex].Id);
             TourViewVM.DeleteTourlog(TourViewVM.SelectedIndex, TourViewVM.SelectedLogIndex);
 
-            TourViewVM.SelectedTour.Popularity = cc.CalcPopularity(TourViewVM.SelectedTour);
+            //recalculates computed attributes when log gets deleted
+            TourViewVM.SelectedTour.Popularity = cc.CalcPopularity(TourViewVM.SelectedTour); 
             TourViewVM.SelectedTour.ChildFriendliness = cc.CalcChildFriendliness(TourViewVM.SelectedTour);
             
         }

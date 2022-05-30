@@ -1,13 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using System.Drawing;
-using System.IO;
 using System.Net.Http;
-using Newtonsoft.Json;
-using System.Globalization;
 using TourPlanner.Models;
 using System.Text.Json.Nodes;
 using TourPlanner.Logging;
@@ -20,21 +13,20 @@ namespace TourPlanner.DataAccessLayer
     {
         private HttpClient client = new HttpClient();
 
-        private IConfiguration config = Configuration.GetInstance();
+        private static IConfiguration config = Configuration.GetInstance();
 
-        private string key; 
+        private string key = config["mapquest:key"];
 
-        //private static ILoggerWrapper logger = LoggerFactory.GetLogger();
+        private static ILoggerWrapper logger = LoggerFactory.GetLogger();
 
         public async Task<Tour> DirectionsRequest(Tour tour)
         {
-            key = config["mapquest:key"];
-            //logger.Fatal("Map created!");
+            logger.Fatal("Map created!");
 
             string directionsrequest = string.Empty; 
             try
             {
-                directionsrequest = await client.GetStringAsync($"http://www.mapquestapi.com/directions/v2/route?key={key}&from={tour.From}&to={tour.To}&unit=k");
+                directionsrequest = await client.GetStringAsync($"http://www.mapquestapi.com/directions/v2/route?key={key}&from={tour.From}&to={tour.To}&unit=k"); //maprequest
             } catch (System.Net.Http.HttpRequestException ex)
             {
                 LoggerFactory.GetLogger().Error("Error while calling Mapquest API - No internet connection");
@@ -46,9 +38,9 @@ namespace TourPlanner.DataAccessLayer
 
             var status = jsoncontent["info"]["statuscode"].ToString();
 
-            if(jsoncontent["info"]["statuscode"].ToString() != "0" || jsoncontent["route"]["distance"].ToString() == "0")
+            if(jsoncontent["info"]["statuscode"].ToString() != "0" || jsoncontent["route"]["distance"].ToString() == "0") //if statuscode != 0 or distance == 0 --> request failed
             {
-                //logger.Error("HTTP Error [" + jsoncontent["info"]["statuscode"].ToString() + "] at Mapquest Request - User entered invalid location(s)");
+                logger.Error("HTTP Error [" + jsoncontent["info"]["statuscode"].ToString() + "] at Mapquest Request - User entered invalid location(s)");
                 return null;
             }
             tour.TourDistance = jsoncontent["route"]["distance"].ToString();

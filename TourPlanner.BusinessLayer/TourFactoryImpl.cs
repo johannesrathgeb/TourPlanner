@@ -1,8 +1,5 @@
-﻿using Moq;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
 using TourPlanner.DataAccessLayer;
 using TourPlanner.Models;
 
@@ -25,12 +22,7 @@ namespace TourPlanner.BusinessLayer
 
         public IEnumerable<Tour> SearchInDB(string itemName)
         {
-           IEnumerable<Tour> tourlist = GetItems();
-
-
             return db.SearchText(itemName.ToLower()); 
-
-            //return tourlist.Where(x => x.Name.ToLower().Contains(itemName.ToLower()) || x.TourDescription.ToLower().Contains(itemName.ToLower()));
         }
 
         public IEnumerable<Tour> DeleteTour(IEnumerable<Tour> OldTours, int index)
