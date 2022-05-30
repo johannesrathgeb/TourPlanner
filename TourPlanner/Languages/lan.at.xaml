@@ -1,6 +1,6 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:system="clr-namespace:System;assembly=netstandard">
-    <system:String x:Key="StrTitle">TourPlannerAT</system:String>
+    <system:String x:Key="StrTitle">TourPlanner</system:String>
     <system:String x:Key="StrSearch">Gemma auf Schatzsuche oda?</system:String>
     <system:String x:Key="StrAdd">Haus dazua</system:String>
     <system:String x:Key="StrDelete">Weg damit</system:String>
@@ -25,4 +25,7 @@
     <system:String x:Key="StrTrain">Tschu Tschu</system:String>
     <system:String x:Key="StrBus">Bussal</system:String>
     <system:String x:Key="StrData">Datn</system:String>
+    <system:String x:Key="StrLogDialog">Gebns eanane Journaldatn ei</system:String>
+    <system:String x:Key="StrTourDialog">Gebns eanane Tourdatn ei</system:String>
+    <system:String x:Key="StrLanguage">Sproch</system:String>
 </ResourceDictionary>

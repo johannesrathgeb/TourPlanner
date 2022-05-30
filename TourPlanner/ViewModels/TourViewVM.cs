@@ -113,12 +113,23 @@ namespace TourPlanner.ViewModels
             }
         }
 
+        public void updateTourList(ObservableCollection<Tour> tourList)
+        {
+            Tours = tourList;
+        }
+
+        public void updateSelectedIndex(int index)
+        {
+            SelectedIndex = index;
+        }
+
         public void updateSelectedTour(Tour tour)
         {
             SelectedTour = tour;
 
             if (SelectedTour != null)
             {
+                //Load Map image
                 Filepath = Path.GetFullPath($"../../../../img/img{SelectedTour.Id}.png");
                 using (var stream = File.Open(Filepath, FileMode.Open))
                 {
@@ -127,7 +138,7 @@ namespace TourPlanner.ViewModels
                 RaisePropertyChangedEvent(nameof(RouteImageSource));
 
                 
-
+                //Load Transport Type image
                 Filepath = Path.GetFullPath($"../../../../TourPlanner/Resources/{SelectedTour.TransportType}.png");
                 using (var stream = File.Open(Filepath, FileMode.Open))
                 {

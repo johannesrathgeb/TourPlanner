@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TourPlanner"
         mc:Ignorable="d"
-        Title="Enter you Log credentials" 
+        Title="{DynamicResource StrLogDialog}" 
         MinHeight="250" 
         MinWidth="500"
         Height="400"
@@ -67,9 +67,13 @@
                     Background="#38354f"
                     Grid.ColumnSpan="2"
                     VerticalAlignment="Center"
-                    Margin="10"/>
-
-        <!--<TextBox Text="{Binding NewLogDate}" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2"/>-->
+                    Margin="10">
+            <DatePicker.Resources>
+                <Style TargetType="DatePickerTextBox">
+                    <Setter Property="IsReadOnly" Value="True"/>
+                </Style>
+            </DatePicker.Resources>
+        </DatePicker>
 
         <TextBox Text="{Binding NewLogComment}" Grid.Row="1" Grid.Column="1"
                  Background="#38354f"

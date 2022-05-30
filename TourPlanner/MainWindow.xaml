@@ -66,8 +66,7 @@
                 </ListBox.ItemTemplate>
             </ListBox>
         </StackPanel>
-
-        
+  
         <!--Left Bottom Buttons-->
         <StackPanel Orientation="Horizontal" Grid.Row="3" Height="50">
             <Button Content="{DynamicResource StrAdd}"
@@ -109,8 +108,6 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
 
-            
-
             <Button Style="{StaticResource RoundedButtonStyle}"         Content="{DynamicResource StrImport}"
                         Grid.Column="0"
                         Background="#38354f"
@@ -147,24 +144,21 @@
                         Margin="10"
                         Padding="5"
                         Command="{Binding GenerateSummarizePDFCommand}"/>
-            
-                
+              
             <Menu Grid.Column="4"
                   Background="#38354f"
                   Foreground="White"
                   FontSize="18"
                   Margin="10"
-                    Padding="5"
-                  >
+                    Padding="5">
 
-                <MenuItem Header="Language" Background="#38354f" VerticalAlignment="Center" HorizontalContentAlignment="Center">
+                <MenuItem Header="{DynamicResource StrLanguage}" Background="#38354f" VerticalAlignment="Center" HorizontalContentAlignment="Center">
                     <MenuItem Background="#38354f" Header="English" BorderThickness="0" Command="{Binding SelectEnglishCommand}"/>
                     <MenuItem Background="#38354f" Header="Deutsch" BorderThickness="0" Command="{Binding SelectGermanCommand}"/>
-                    <MenuItem Background="#38354f" Header="Österreich, Österreich" BorderThickness="0" Command="{Binding SelectAustrianCommand}"/>
+                    <MenuItem Background="#38354f" Header="Lond da Berge" BorderThickness="0" Command="{Binding SelectAustrianCommand}"/>
                 </MenuItem>
             </Menu>
         </Grid>
-
 
         <!--<TextBox Grid.Row="0" Grid.Column="0" Text="{Binding SearchText}" Background="DarkGray" Foreground="White"/>
             <Button Grid.Row="0" Grid.Column="1" Content="Search" Background="LightGray" Foreground="Black" Command="{Binding GetSearchedToursCommand}"/>

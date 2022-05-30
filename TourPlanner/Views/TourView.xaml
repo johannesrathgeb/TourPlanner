@@ -8,8 +8,6 @@
              VerticalContentAlignment="Stretch" 
              HorizontalContentAlignment="Stretch">
 
-
-
     <Grid Margin="10,0,0,0">
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
@@ -158,21 +156,24 @@
                         <TextBlock Text="{Binding SelectedTour.From}"
                                 Foreground="White"
                                 FontSize="20"
-                                TextAlignment="Left"/>
+                                TextAlignment="Left"
+                                   Margin="10"/>
                     </Viewbox>
 
                     <Viewbox Grid.Row="1" Grid.Column="1">
                         <TextBlock Text="-"
                                 Foreground="White"
                                 FontSize="20"
-                                TextAlignment="Center"/>
+                                TextAlignment="Center"
+                                   Margin="10"/>
                     </Viewbox>
 
                     <Viewbox Grid.Row="2" Grid.Column="2">
                         <TextBlock Text="{Binding SelectedTour.To}"
                                 Foreground="White"
                                 FontSize="20"
-                                TextAlignment="Right"/>
+                                TextAlignment="Right"
+                                   Margin="10"/>
                     </Viewbox>
 
                     <Image Source="{Binding TransportTypeImage}" 
@@ -189,7 +190,8 @@
                     Height="Auto"
                     Background="#4e99ff"
                     Margin="20"
-                    CornerRadius="10">
+                    CornerRadius="10"
+                    Padding="10">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
@@ -212,7 +214,7 @@
                         <TextBlock Text="{Binding SelectedTour.EstimatedTime}"
                                     Foreground="White"
                                     FontSize="20"
-                                    
+                                    Margin="10,0,0,0"
                                     TextAlignment="Right"/>
                     </Viewbox>
 
@@ -232,7 +234,8 @@
                     Height="Auto"
                     Background="#69ff4e"
                     Margin="20"
-                    CornerRadius="10">
+                    CornerRadius="10"
+                    Padding="10">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="2*"/>
@@ -252,7 +255,8 @@
             <Border Grid.Column="3"                    
                     Background="#ffa14e"
                     Margin="20"
-                    CornerRadius="10">
+                    CornerRadius="10"
+                    Padding="10">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="2*"/>

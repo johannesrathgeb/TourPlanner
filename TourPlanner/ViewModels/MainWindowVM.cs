@@ -16,11 +16,8 @@ namespace TourPlanner.ViewModels
         private ObservableCollection<Tour> tours = new ObservableCollection<Tour>();
         private ITourFactory tourFactory;
         public ICommand OpenDialogCommand { get; }
-        public ICommand OpenLogsDialogCommand { get; }
         public ICommand DeleteTourCommand { get; }
         public ICommand OpenEditDialogCommand { get; }
-        public ICommand OpenEditLogsDialogCommand { get; }
-        public ICommand DeleteLogCommand { get; }
         public ICommand GenerateTourPDFCommand { get; }
         public ICommand GenerateSummarizePDFCommand { get; }
         public ICommand ImportToursCommand { get; }
@@ -48,20 +45,6 @@ namespace TourPlanner.ViewModels
             }
         }
 
-        private string? filepath;
-        public string? Filepath
-        {
-            get => filepath;
-            set
-            {
-                if (filepath != value)
-                {
-                    filepath = value;
-                    RaisePropertyChangedEvent();
-                }
-            }
-        }
-
         private string? searchText;
         public string? SearchText
         {
@@ -76,79 +59,6 @@ namespace TourPlanner.ViewModels
             }
         }
 
-
-        private string informationVisible;
-        private string routeVisible;
-        public string InformationVisible
-        {
-            get => informationVisible;
-            set
-            {
-                if (informationVisible != value)
-                {
-                    informationVisible = value;
-                    RaisePropertyChangedEvent();
-                }
-            }
-        }
-        public string RouteVisible
-        {
-            get => routeVisible;
-            set
-            {
-                if (routeVisible != value)
-                {
-                    routeVisible = value;
-                    RaisePropertyChangedEvent();
-                }
-            }
-        }
-
-        private bool descriptionChecked;
-
-        public bool DescriptionChecked
-        {
-            get => descriptionChecked;
-            set
-            {
-                if (descriptionChecked != value)
-                {
-                    descriptionChecked = value;
-                    RaisePropertyChangedEvent();
-                    ChangeVisibilityValues(value);
-                }
-            }
-        }
-
-        public void ChangeVisibilityValues(bool value)
-        {
-            if (value == true)
-            {
-                InformationVisible = "Visible";
-                RouteVisible = "Hidden";
-            }
-            else
-            {
-                InformationVisible = "Hidden";
-                RouteVisible = "Visible";
-            }
-        }
-
-        private int selectedLogIndex = -1; 
-
-        public int SelectedLogIndex
-        {
-            get => selectedLogIndex;
-            set
-            {
-                if (selectedLogIndex != value)
-                {
-                    selectedLogIndex = value;
-                    RaisePropertyChangedEvent();
-                }
-            }
-        }
-
         private int selectedIndex = -1;
         public int SelectedIndex
         {
@@ -158,43 +68,14 @@ namespace TourPlanner.ViewModels
                 if (selectedIndex != value)
                 {
                     selectedIndex = value;
+                    TourVM.updateSelectedIndex(selectedIndex);
                     RaisePropertyChangedEvent();
 
                     SelectedTour = ChangeTourSelection(value);
-
-                    if (SelectedTour != null)
-                    {
-                        Filepath = Path.GetFullPath($"../../../../img/img{SelectedTour.Id}.png");
-                        using (var stream = File.Open(Filepath, FileMode.Open))
-                        {
-                            RouteImageSource = ReadFully(stream);
-                        }
-                        RaisePropertyChangedEvent(nameof(RouteImageSource));
-                        
-
-                    }
-                    else
-                    {
-                        RouteImageSource = null;
-                        RaisePropertyChangedEvent(nameof(RouteImageSource));
-                    }
                 }
             }
         }
-        public static byte[] ReadFully(Stream input)
-        {
-            var buffer = new byte[16 * 1024];
-            using (var ms = new MemoryStream())
-            {
-                int read;
-                while ((read = input.Read(buffer, 0, buffer.Length)) > 0)
-                {
-                    ms.Write(buffer, 0, read);
-                }
-                return ms.ToArray();
-            }
-        }
-
+        
         private Tour? selectedTour;
         public Tour? SelectedTour
         {
@@ -213,6 +94,7 @@ namespace TourPlanner.ViewModels
                 }
             }
         }
+        
         public ObservableCollection<Tour> Tours
         {
             get => tours;
@@ -221,12 +103,15 @@ namespace TourPlanner.ViewModels
                 if (tours != value)
                 {
                     tours = value;
+                    TourVM.updateTourList(tours);
                     RaisePropertyChangedEvent();
                 }
             }
         }
+
         public MainWindowVM()
         {
+            //Load TourVM to load TourData in MainView from TourView
             TourVM = new TourViewVM();
             CurrentView = TourVM;
 
@@ -248,17 +133,11 @@ namespace TourPlanner.ViewModels
                 SelectedTour = Tours[0];
             }
 
-            
-
             OpenDialogCommand = new OpenDialogCommand(this);
 
             DeleteTourCommand = new DeleteTourCommand(this);
 
-            //DeleteLogCommand = new DeleteLogCommand(this); 
-
             OpenEditDialogCommand = new OpenEditDialogCommand(this);
-
-            //OpenEditLogsDialogCommand = new OpenEditLogsDialogCommand(this);
 
             GenerateTourPDFCommand = new GeneratePDFCommand(Tours, 0, this);
 
@@ -277,9 +156,8 @@ namespace TourPlanner.ViewModels
             SelectEnglishCommand = new SelectLanguageCommand(this, "en");
 
             SelectGermanCommand = new SelectLanguageCommand(this, "de");
-            SelectAustrianCommand = new SelectLanguageCommand(this, "at");
 
-            DescriptionChecked = true;
+            SelectAustrianCommand = new SelectLanguageCommand(this, "at");
 
             SelectEnglishCommand.Execute(this);
 

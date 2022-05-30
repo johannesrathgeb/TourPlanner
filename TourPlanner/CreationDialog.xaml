@@ -9,7 +9,7 @@
         WindowStartupLocation="CenterOwner"
         FocusManager.FocusedElement="{Binding ElementName=txtName}"
         mc:Ignorable="d"
-        Title="Enter your Tour credentials" 
+        Title="{DynamicResource StrTourDialog}" 
         MinHeight="250" 
         MinWidth="500"
         Height="400"
@@ -97,7 +97,8 @@
                  Grid.ColumnSpan="2"/>
 
         <ComboBox SelectedIndex="{Binding NewTourTransportType}" Grid.Row="4" Grid.Column="1"
-                  Grid.ColumnSpan="2">
+                  Grid.ColumnSpan="2"
+                  Margin="10">
             <ComboBoxItem IsSelected="True" Content="{DynamicResource StrCar}"/>
             <ComboBoxItem Content="{DynamicResource StrTrain}"/>
             <ComboBoxItem Content="{DynamicResource StrBus}"/>
