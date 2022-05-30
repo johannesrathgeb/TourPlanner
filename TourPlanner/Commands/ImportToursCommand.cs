@@ -19,7 +19,7 @@ namespace TourPlanner.Commands
         public override async void Execute(object? parameter)
         {
             OpenFileDialog ofd = new OpenFileDialog();
-            ofd.Filter = "txt files (*.txt)|*.txt";
+            ofd.Filter = "json files (*.json)|*.json";
             bool? res = ofd.ShowDialog();
             
             if (res == true)

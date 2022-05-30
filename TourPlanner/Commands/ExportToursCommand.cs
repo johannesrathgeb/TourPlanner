@@ -23,7 +23,7 @@ namespace TourPlanner.Commands
             ProcessFileData pfd = new ProcessFileData();
 
             SaveFileDialog sfd = new SaveFileDialog();
-            sfd.Filter = "txt files (*.txt)|*.txt";
+            sfd.Filter = "json files (*.json)|*.json";
             bool? res = sfd.ShowDialog();
 
             if(res == true)
